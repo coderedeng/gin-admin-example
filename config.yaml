@@ -1,0 +1,35 @@
+system:
+  name: "ginProject"
+  port: 8888
+  mode: "dev"
+
+pgsql:
+  host: "127.0.0.1"
+  port: 5432
+  config: sslmode=disable TimeZone=Asia/Shanghai
+  db-name: "gpa"
+  username: "postgres"
+  password: "123456"
+  prefix: ""
+  singular: false
+  engine: ""
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: error
+  log-zap: false
+zap:
+  level: "info"
+  prefix: '[ginProject]'
+  format: console
+  director: log
+  encode-level: LowercaseColorLevelEncoder
+  stacktrace-key: stacktrace
+  max-age: 0
+  show-line: true
+  log-in-console: true
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  db: 0
+  poolSize: 20
