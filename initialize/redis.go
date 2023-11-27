@@ -19,7 +19,7 @@ func Redis() *redis.Client {
 
 	_, err := rdb.Ping().Result()
 	if err != nil {
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+		panic(fmt.Errorf("连接Redis报错: %s \n", err))
 	}
 	return rdb
 }

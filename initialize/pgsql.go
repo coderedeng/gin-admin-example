@@ -5,7 +5,6 @@ import (
 	"ginProject/global"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"go.uber.org/zap"
 )
 
 func Pgsql() *gorm.DB {
@@ -19,7 +18,7 @@ func Pgsql() *gorm.DB {
 	)
 	db, err := gorm.Open("postgres", dsn)
 	if err != nil {
-		zap.L().Error("连接PgSQL报错：", zap.Error(err))
+		panic(fmt.Errorf("连接PgSQL报错： %s \n", err))
 	}
 
 	sqlDB := db.DB()
