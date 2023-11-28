@@ -26,10 +26,17 @@ func main() {
 	global.GVA_DB = initialize.Pgsql()
 	// 4.初始化redis连接
 	global.GVA_REDIS = initialize.Redis()
+	// 5. 初始化gorm框架
+	if global.GVA_DB != nil {
+		initialize.RegisterTables() // 初始化表
+		// 程序结束前关闭数据库链接
+		db, _ := global.GVA_DB.DB()
+		defer db.Close()
+	}
 
-	// 5.注册路由
+	// 6.注册路由
 	r := router.SetUp()
-	// 6.启动服务（优雅关机）
+	// 7.启动服务（优雅关机）
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", global.GVA_CONFIG.System.Port),
 		Handler: r,

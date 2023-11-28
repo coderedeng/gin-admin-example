@@ -3,9 +3,9 @@ package global
 import (
 	"ginProject/config"
 	"github.com/go-redis/redis"
-	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 var (
