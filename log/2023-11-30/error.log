@@ -1,0 +1,2 @@
+[ginProject]2023/11/30 - 21:19:56.144	[31merror[0m	F:/GoStudy/ginProject/core/server.go:52	listen tcp :8888: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+[ginProject]2023/11/30 - 21:30:23.115	[31merror[0m	F:/GoStudy/ginProject/core/server.go:44	listen tcp :8888: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
