@@ -2,7 +2,7 @@ package model
 
 import (
 	"ginProject/global"
-	"github.com/google/uuid"
+	"github.com/satori/go.uuid"
 )
 
 type SysUser struct {

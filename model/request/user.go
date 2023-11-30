@@ -1,6 +1,6 @@
 package request
 
-// Register User register structure
+// UserRegister User register structure
 type UserRegister struct {
 	Username  string `json:"userName" example:"用户名"`
 	Password  string `json:"passWord" example:"密码"`

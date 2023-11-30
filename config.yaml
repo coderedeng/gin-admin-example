@@ -2,7 +2,7 @@ system:
   name: "ginProject"
   port: 8888
   mode: "dev"
-
+  routerPrefix: "/api"
 pgsql:
   host: "127.0.0.1"
   port: 5432
