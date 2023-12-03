@@ -158,3 +158,7 @@
 [ginProject]2023/12/03 - 15:07:10.221	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
 [ginProject]2023/12/03 - 15:07:10.222	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
 [ginProject]2023/12/03 - 15:07:10.223	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 21:02:38.821	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 21:02:38.896	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 21:02:38.897	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 21:02:38.898	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler

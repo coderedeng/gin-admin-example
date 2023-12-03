@@ -16,6 +16,10 @@ import (
 
 type UserApi struct{}
 
+// 当开启多服务器部署时，替换下面的配置，使用redis共享存储验证码
+// var store = captcha.NewDefaultRedisStore()
+var store = base64Captcha.DefaultMemStore
+
 // Register
 // @Tags     User
 // @Summary  用户注册账号
@@ -151,10 +155,6 @@ func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
 	}
 }
 
-// 当开启多服务器部署时，替换下面的配置，使用redis共享存储验证码
-// var store = captcha.NewDefaultRedisStore()
-var store = base64Captcha.DefaultMemStore
-
 // Captcha
 // @Tags      User
 // @Summary   生成验证码
@@ -163,7 +163,8 @@ var store = base64Captcha.DefaultMemStore
 // @Produce   application/json
 // @Success   200  {object}  response.Response{data=res.SysCaptchaResponse,msg=string}  "生成验证码,返回包括随机数id,base64,验证码长度,是否开启验证码"
 // @Router    /api/user/captcha [post]
-func (b *UserApi) Captcha(c *gin.Context) {
+func (u *UserApi) Captcha(c *gin.Context) {
+
 	// 判断验证码是否开启
 	openCaptcha := global.GVA_CONFIG.Captcha.OpenCaptcha               // 是否开启防爆次数
 	openCaptchaTimeOut := global.GVA_CONFIG.Captcha.OpenCaptchaTimeOut // 缓存超时时间
