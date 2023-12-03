@@ -1,0 +1,160 @@
+[ginProject]2023/12/03 - 13:04:18.449	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:04:18.554	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:04:18.555	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:04:18.556	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:04:45.273	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:04:45.343	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:04:45.356	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:04:45.357	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:07:58.837	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:07:58.911	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:07:58.911	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:07:58.912	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:09:33.320	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:09:33.384	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:09:33.385	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:09:33.386	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:09:54.389	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:09:54.455	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:09:54.456	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:09:54.457	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:12:21.245	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:12:21.323	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:12:21.324	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:12:21.325	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:12:36.649	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:12:36.729	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:12:36.729	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:12:36.730	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:13:22.226	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:13:22.289	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:13:22.290	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:13:22.291	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:15:22.059	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:15:22.139	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:15:22.140	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:15:22.141	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:15:32.816	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:15:32.890	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:15:32.892	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:15:32.893	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:17:06.733	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:17:06.792	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:17:06.793	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:17:06.794	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:17:35.746	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:17:35.816	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:17:35.817	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:17:35.819	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:37:48.943	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:37:49.012	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:37:49.785	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:35	register swagger handler
+[ginProject]2023/12/03 - 13:37:49.787	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:39	register knife4g handler
+[ginProject]2023/12/03 - 13:41:14.147	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:41:14.218	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:41:14.228	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:38	register swagger handler
+[ginProject]2023/12/03 - 13:41:14.229	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:42	register knife4g handler
+[ginProject]2023/12/03 - 13:43:17.890	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:43:17.953	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:43:18.631	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:36	register swagger handler
+[ginProject]2023/12/03 - 13:43:18.632	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:40	register knife4g handler
+[ginProject]2023/12/03 - 13:45:20.199	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:45:20.264	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:45:22.980	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:38	register swagger handler
+[ginProject]2023/12/03 - 13:45:22.983	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:42	register knife4g handler
+[ginProject]2023/12/03 - 13:46:38.922	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:46:38.988	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:46:38.989	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:46:38.990	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:47:23.095	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:47:23.167	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:47:23.167	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:47:23.168	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:54:10.706	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:54:10.786	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:54:10.786	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:54:10.787	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:54:31.225	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:54:31.300	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:54:31.301	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:54:31.301	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:55:42.217	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:55:42.292	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:55:42.293	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:55:42.294	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 13:59:19.048	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 13:59:19.122	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 13:59:19.123	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 13:59:19.125	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:00:33.706	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:00:33.781	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:00:33.782	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:00:33.783	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:11:51.639	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:11:51.712	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:11:51.713	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:11:51.714	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:15:41.166	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:15:41.236	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:15:41.237	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:15:41.238	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:16:12.755	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:16:12.836	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:16:12.837	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:16:12.838	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:16:45.173	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:16:45.236	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:16:45.237	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:16:45.238	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:18:56.199	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:18:56.276	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:18:56.276	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:18:56.277	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:19:32.132	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:19:32.212	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:19:32.213	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:19:32.213	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:20:52.663	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:20:52.735	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:20:52.736	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:20:52.738	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:21:18.936	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:21:19.006	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:21:19.007	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:21:19.008	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:39:13.834	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:39:13.907	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:39:13.907	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:39:13.909	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:42:47.556	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:42:47.631	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:42:47.632	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:42:47.633	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:43:27.943	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:43:28.013	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:43:28.014	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:43:28.015	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:45:29.883	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:45:29.951	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:45:29.951	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:45:29.952	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:54:30.551	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:54:30.627	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:54:30.627	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:54:30.629	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:57:50.434	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:57:50.509	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:57:50.510	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:57:50.511	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 14:58:21.437	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 14:58:21.501	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 14:58:21.502	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 14:58:21.503	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 15:02:07.690	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 15:02:07.752	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 15:02:07.752	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 15:02:07.753	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler
+[ginProject]2023/12/03 - 15:07:10.156	[34minfo[0m	F:/GoStudy/ginProject/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
+[ginProject]2023/12/03 - 15:07:10.221	[34minfo[0m	F:/GoStudy/ginProject/initialize/gorm.go:15	register table success
+[ginProject]2023/12/03 - 15:07:10.222	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:18	register swagger handler
+[ginProject]2023/12/03 - 15:07:10.223	[34minfo[0m	F:/GoStudy/ginProject/initialize/router.go:22	register knife4g handler

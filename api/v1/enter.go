@@ -12,4 +12,5 @@ var ApiGroupApp = new(ApiGroup)
 
 var (
 	userService = service.UserService{}
+	jwtService  = service.JwtService{}
 )

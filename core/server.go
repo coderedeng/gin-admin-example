@@ -12,7 +12,6 @@ type server interface {
 }
 
 func RunWindowsServer() {
-
 	// 1. 加载配置
 	global.GVA_VP = Viper()
 	// 2.初始化日志
@@ -32,6 +31,9 @@ func RunWindowsServer() {
 
 	// 6.注册路由
 	Router := initialize.Routers()
+
+	// 初始化本地缓存
+	initialize.OtherInit()
 
 	// 7.启动服务（优雅关机）
 	address := fmt.Sprintf(":%d", global.GVA_CONFIG.System.Port)

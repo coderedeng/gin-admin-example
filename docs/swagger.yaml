@@ -44,6 +44,21 @@ definitions:
         description: 用户UUID
         type: string
     type: object
+  request.UserLogin:
+    properties:
+      captcha:
+        description: 验证码
+        type: string
+      captchaId:
+        description: 验证码ID
+        type: string
+      password:
+        description: 密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    type: object
   request.UserRegister:
     properties:
       email:
@@ -76,6 +91,17 @@ definitions:
       msg:
         type: string
     type: object
+  response.SysCaptchaResponse:
+    properties:
+      captchaId:
+        type: string
+      captchaLength:
+        type: integer
+      openCaptcha:
+        type: boolean
+      picPath:
+        type: string
+    type: object
   response.UserResponse:
     properties:
       user:
@@ -84,6 +110,55 @@ definitions:
 info:
   contact: {}
 paths:
+  /api/user/captcha:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 生成验证码,返回包括随机数id,base64,验证码长度,是否开启验证码
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysCaptchaResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 生成验证码
+      tags:
+      - User
+  /api/user/login:
+    post:
+      parameters:
+      - description: 用户名, 密码, 验证码
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.UserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 返回包括用户信息,token,过期时间
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.UserResponse'
+                msg:
+                  type: string
+              type: object
+      summary: 用户登录
+      tags:
+      - User
   /api/user/register:
     post:
       parameters:
@@ -109,5 +184,5 @@ paths:
               type: object
       summary: 用户注册账号
       tags:
-      - SysUser
+      - User
 swagger: "2.0"

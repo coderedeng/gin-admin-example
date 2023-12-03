@@ -1,0 +1,2 @@
+[ginProject]2023/12/03 - 15:02:47.332	[31merror[0m	F:/GoStudy/ginProject/api/v1/user.go:76	登陆失败! 用户名不存在或者密码错误!	{"error": "Authorities: unsupported relations for schema SysUser; Authority: unsupported relations for schema SysUser"}
+[ginProject]2023/12/03 - 15:03:46.475	[31merror[0m	F:/GoStudy/ginProject/api/v1/user.go:76	登陆失败! 用户名不存在或者密码错误!	{"error": "Authorities: unsupported relations for schema SysUser; Authority: unsupported relations for schema SysUser"}

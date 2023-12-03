@@ -22,8 +22,10 @@ func Routers() *gin.Engine {
 	global.GVA_LOG.Info("register knife4g handler")
 
 	PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
+	//PrivateGroup.Use(middleware.JWTAuth())
 	{
-		router.RouterGroupApp.InitUserRouter(PrivateGroup) // 注册用户路由
+		router.RouterGroupApp.InitUserRouter(PrivateGroup) // 初始化用户路由
 	}
 	return Router
+
 }

@@ -1,25 +1,27 @@
 package initialize
 
 import (
+	"context"
 	"fmt"
 	"ginProject/global"
-	"github.com/go-redis/redis"
+	"github.com/go-redis/redis/v8"
+	"go.uber.org/zap"
 )
 
 func Redis() *redis.Client {
 	Addr := fmt.Sprintf("%s:%d",
 		global.GVA_CONFIG.Redis.Host,
 		global.GVA_CONFIG.Redis.Port)
-	rdb := redis.NewClient(&redis.Options{
+	client := redis.NewClient(&redis.Options{
 		Addr:     Addr,
-		Password: global.GVA_CONFIG.Redis.PassWord, // 密码
-		DB:       global.GVA_CONFIG.Redis.DB,       // 数据库
-		PoolSize: global.GVA_CONFIG.Redis.PoolSize, // 连接池大小
+		Password: global.GVA_CONFIG.Redis.PassWord, // no password set
+		DB:       global.GVA_CONFIG.Redis.DB,       // use default DB
 	})
-
-	_, err := rdb.Ping().Result()
+	pong, err := client.Ping(context.Background()).Result()
 	if err != nil {
-		panic(fmt.Errorf("连接Redis报错: %s \n", err))
+		global.GVA_LOG.Error("redis connect ping failed, err:", zap.Error(err))
+	} else {
+		global.GVA_LOG.Info("redis connect ping response:", zap.String("pong", pong))
 	}
-	return rdb
+	return client
 }

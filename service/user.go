@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"ginProject/global"
 	"ginProject/model"
 	"ginProject/utils"
@@ -21,4 +22,19 @@ func (userService *UserService) Register(u model.SysUser) (userInter model.SysUs
 	u.UUID = uuid.NewV4()
 	err = global.GVA_DB.Create(&u).Error
 	return u, err
+}
+
+func (userService *UserService) Login(u *model.SysUser) (userInter *model.SysUser, err error) {
+	if nil == global.GVA_DB {
+		return nil, fmt.Errorf("db not init")
+	}
+
+	var user model.SysUser
+	err = global.GVA_DB.Where("username = ?", u.Username).First(&user).Error
+	if err == nil {
+		if ok := utils.BcryptCheck(u.Password, user.Password); !ok {
+			return nil, errors.New("密码错误")
+		}
+	}
+	return &user, err
 }
