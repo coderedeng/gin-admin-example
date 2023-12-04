@@ -3,6 +3,7 @@ package v1
 import (
 	"ginProject/global"
 	"ginProject/model"
+	"ginProject/model/common/request"
 	"ginProject/model/common/response"
 	req "ginProject/model/request"
 	res "ginProject/model/response"
@@ -164,7 +165,6 @@ func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
 // @Success   200  {object}  response.Response{data=res.SysCaptchaResponse,msg=string}  "生成验证码,返回包括随机数id,base64,验证码长度,是否开启验证码"
 // @Router    /api/user/captcha [post]
 func (u *UserApi) Captcha(c *gin.Context) {
-
 	// 判断验证码是否开启
 	openCaptcha := global.GVA_CONFIG.Captcha.OpenCaptcha               // 是否开启防爆次数
 	openCaptchaTimeOut := global.GVA_CONFIG.Captcha.OpenCaptchaTimeOut // 缓存超时时间
@@ -206,4 +206,38 @@ func interfaceToInt(v interface{}) (i int) {
 		i = 0
 	}
 	return
+}
+
+// GetUserList
+// @Tags      User
+// @Summary   获取系统用户列表
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     data  body      request.PageInfo true  "页码, 每页大小"
+// @Success   200  {object}  response.Response{data=response.PageResult,msg=string}  "分页获取用户列表,返回包括列表,总数,页码,每页数量"
+// @Router    /api/user/GetUserList [post]
+func (u *UserApi) GetUserList(c *gin.Context) {
+	var pageInfo request.PageInfo
+
+	err := c.ShouldBindJSON(&pageInfo)
+
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	list, total, err := userService.GetUserList(pageInfo)
+
+	if err != nil {
+		global.GVA_LOG.Error("获取系统用户列表失败!", zap.Error(err))
+		response.FailWithMessage("获取系统用户列表失败!", c)
+		return
+	}
+	response.OkWithDetailed(response.PageResult{
+		List:     list,
+		Total:    total,
+		Page:     pageInfo.Page,
+		PageSize: pageInfo.PageSize,
+	}, "获取成功", c)
 }

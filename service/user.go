@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"ginProject/global"
 	"ginProject/model"
+	"ginProject/model/common/request"
 	"ginProject/utils"
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/gorm"
@@ -37,4 +38,18 @@ func (userService *UserService) Login(u *model.SysUser) (userInter *model.SysUse
 		}
 	}
 	return &user, err
+}
+
+func (userService *UserService) GetUserList(info request.PageInfo) (list interface{}, total int64, err error) {
+	limit := info.PageSize
+	offset := info.PageSize * (info.Page - 1)
+	db := global.GVA_DB.Model(&model.SysUser{})
+	var userList []model.SysUser
+	err = db.Count(&total).Error
+	if err != nil {
+		return
+	}
+
+	err = db.Limit(limit).Offset(offset).Find(&userList).Error
+	return userList, total, err
 }
