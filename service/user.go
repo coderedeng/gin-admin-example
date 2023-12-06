@@ -53,3 +53,30 @@ func (userService *UserService) GetUserList(info request.PageInfo) (list interfa
 	err = db.Limit(limit).Offset(offset).Find(&userList).Error
 	return userList, total, err
 }
+
+func (userService *UserService) ChangePassWord(u *model.SysUser, newPassword string) (userInter *model.SysUser, err error) {
+	var user model.SysUser
+	if err = global.GVA_DB.Where("id = ?", u.ID).First(&user).Error; err != nil {
+		return nil, err
+	}
+	if ok := utils.BcryptCheck(u.Password, user.Password); !ok {
+		return nil, errors.New("原密码错误")
+	}
+	user.Password = utils.BcryptHash(newPassword)
+	err = global.GVA_DB.Save(&user).Error
+	return &user, err
+
+}
+
+// GetUserInfo
+// @description: 获取用户信息
+// @param: uuid uuid.UUID
+// @return: model.SysUser, user err error
+func (userService *UserService) GetUserInfo(uuid uuid.UUID) (user model.SysUser, err error) {
+	err = global.GVA_DB.First(&user, "uuid = ?", uuid).Error
+	if err != nil {
+		return user, err
+	}
+	//MenuServiceApp.UserAuthorityDefaultRouter(&user)
+	return user, err
+}

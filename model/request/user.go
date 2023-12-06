@@ -18,3 +18,10 @@ type UserLogin struct {
 	Captcha   string `json:"captcha"`   // 验证码
 	CaptchaId string `json:"captchaId"` // 验证码ID
 }
+
+// ChangePassWord User change password
+type ChangePassWord struct {
+	ID              uint   `json:"-"` // 从 JWT 中提取 user id，避免越权
+	Password        string `json:"passWord" example:"密码"`
+	ConfirmPassword string `json:"confirmPassword" example:"确认密码"`
+}

@@ -241,3 +241,51 @@ func (u *UserApi) GetUserList(c *gin.Context) {
 		PageSize: pageInfo.PageSize,
 	}, "获取成功", c)
 }
+
+// ChangePassWord
+// @Tags      User
+// @Summary   用户修改密码
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     data  body      request.ChangePassWord true  "账号, 密码, 确认密码"
+// @Success   200  {object}  response.Response{msg=string}  "用户修改密码,返回包括修改成功，失败"
+// @Router    /api/user/ChangePassWord [post]
+func (u *UserApi) ChangePassWord(c *gin.Context) {
+	var p req.ChangePassWord
+
+	err := c.ShouldBindJSON(&p)
+
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	uid := utils.GetUserID(c)
+	user := &model.SysUser{GVA_MODEL: global.GVA_MODEL{ID: uid}, Password: p.Password}
+	_, err = userService.ChangePassWord(user, p.ConfirmPassword)
+	if err != nil {
+		global.GVA_LOG.Error("修改失败!", zap.Error(err))
+		response.FailWithMessage("修改失败，原密码与当前账户不符", c)
+		return
+	}
+	response.OkWithMessage("修改成功", c)
+}
+
+// GetUserInfo
+// @Tags      User
+// @Summary   获取用户信息
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Success   200  {object}  response.Response{data=map[string]interface{},msg=string}  "获取用户信息"
+// @Router    /api/user/GetUserInfo [get]
+func (u *UserApi) GetUserInfo(c *gin.Context) {
+	uuid := utils.GetUserUuid(c)
+	userInfo, err := userService.GetUserInfo(uuid)
+	if err != nil {
+		global.GVA_LOG.Error("获取失败!", zap.Error(err))
+		response.FailWithMessage("获取失败", c)
+		return
+	}
+	response.OkWithDetailed(userInfo, "获取成功!", c)
+}

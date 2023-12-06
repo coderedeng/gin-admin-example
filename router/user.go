@@ -19,6 +19,8 @@ func (s *UserRouter) InitUserRouter(Router *gin.RouterGroup) {
 		userRouter.POST("captcha", userApi.Captcha)   // 管理员注册账号
 	}
 	{
-		jwtUserRouter.POST("GetUserList", userApi.GetUserList) // 获取系统用户列表
+		jwtUserRouter.POST("GetUserList", userApi.GetUserList)       // 获取系统用户列表
+		jwtUserRouter.POST("ChangePassWord", userApi.ChangePassWord) // 获取系统用户列表
+		jwtUserRouter.GET("GetUserInfo", userApi.GetUserInfo)        // 获取系统用户列表
 	}
 }

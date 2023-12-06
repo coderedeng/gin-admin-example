@@ -44,6 +44,15 @@ definitions:
         description: 用户UUID
         type: string
     type: object
+  request.ChangePassWord:
+    properties:
+      confirmPassword:
+        example: 确认密码
+        type: string
+      passWord:
+        example: 密码
+        type: string
+    type: object
   request.PageInfo:
     properties:
       keyword:
@@ -132,6 +141,58 @@ definitions:
 info:
   contact: {}
 paths:
+  /api/user/ChangePassWord:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 账号, 密码, 确认密码
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.ChangePassWord'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 用户修改密码,返回包括修改成功，失败
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 用户修改密码
+      tags:
+      - User
+  /api/user/GetUserInfo:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取用户信息
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  additionalProperties: true
+                  type: object
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户信息
+      tags:
+      - User
   /api/user/GetUserList:
     post:
       consumes:
