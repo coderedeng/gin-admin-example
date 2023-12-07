@@ -12,6 +12,7 @@ import (
 	"github.com/go-redis/redis"
 	"github.com/mojocn/base64Captcha"
 	"go.uber.org/zap"
+	"strconv"
 	"time"
 )
 
@@ -159,7 +160,6 @@ func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
 // Captcha
 // @Tags      User
 // @Summary   生成验证码
-// @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
 // @Success   200  {object}  response.Response{data=res.SysCaptchaResponse,msg=string}  "生成验证码,返回包括随机数id,base64,验证码长度,是否开启验证码"
@@ -288,4 +288,60 @@ func (u *UserApi) GetUserInfo(c *gin.Context) {
 		return
 	}
 	response.OkWithDetailed(userInfo, "获取成功!", c)
+}
+
+// DeleteUser
+// @Tags      User
+// @Summary   删除用户
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     id  query  uint                true  "用户ID"
+// @Success   200   {object}  response.Response{msg=string}  "删除用户"
+// @Router    /api/user/DeleteUser [delete]
+func (u *UserApi) DeleteUser(c *gin.Context) {
+	id, err := strconv.ParseUint(c.Query("id"), 10, 64)
+	if err != nil {
+		response.FailWithMessage("用户id不能为空", c)
+		return
+	}
+	userId := uint(id)
+
+	jwtId := utils.GetUserID(c)
+	if jwtId == userId {
+		response.FailWithMessage("删除失败，不能删除自己", c)
+		return
+	}
+
+	err = userService.DeleteUser(userId)
+	if err != nil {
+		global.GVA_LOG.Error("删除失败!", zap.Error(err))
+		response.FailWithMessage("删除失败", c)
+		return
+	}
+	response.OkWithMessage("删除成功", c)
+}
+
+// ResetPassword
+// @Tags      User
+// @Summary   重置用户密码
+// @Security  ApiKeyAuth
+// @Produce   application/json
+// @Param     id  query  uint                true  "用户ID"
+// @Success   200   {object}  response.Response{msg=string}  "重置用户密码"
+// @Router    /api/user/ResetPassword [get]
+func (u *UserApi) ResetPassword(c *gin.Context) {
+	id, err := strconv.ParseUint(c.Query("id"), 10, 64)
+	if err != nil {
+		response.FailWithMessage("用户id不能为空", c)
+		return
+	}
+	userId := uint(id)
+	err = userService.ResetPassword(userId)
+	if err != nil {
+		global.GVA_LOG.Error("重置失败!", zap.Error(err))
+		response.FailWithMessage("重置失败"+err.Error(), c)
+		return
+	}
+	response.OkWithMessage("重置成功", c)
 }
