@@ -3,6 +3,7 @@ package initialize
 import (
 	"ginProject/global"
 	"ginProject/model"
+	adapter "github.com/casbin/gorm-adapter/v3"
 	"go.uber.org/zap"
 	"os"
 )
@@ -20,6 +21,7 @@ func RegisterTables() {
 		model.SysBaseMenuParameter{},
 		model.SysBaseMenuBtn{},
 		model.SysAuthorityBtn{},
+		adapter.CasbinRule{},
 	)
 
 	if err != nil {

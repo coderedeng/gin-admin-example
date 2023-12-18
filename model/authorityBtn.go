@@ -6,3 +6,7 @@ type SysAuthorityBtn struct {
 	SysBaseMenuBtnID uint           `gorm:"comment:菜单按钮ID"`
 	SysBaseMenuBtn   SysBaseMenuBtn ` gorm:"comment:按钮详情"`
 }
+
+func (SysAuthorityBtn) TableName() string {
+	return "authority_btn"
+}

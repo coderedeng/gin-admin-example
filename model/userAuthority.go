@@ -7,5 +7,5 @@ type SysUserAuthority struct {
 }
 
 func (s *SysUserAuthority) TableName() string {
-	return "userAuthority"
+	return "user_authority"
 }

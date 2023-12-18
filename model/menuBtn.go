@@ -8,3 +8,7 @@ type SysBaseMenuBtn struct {
 	Desc          string `json:"desc" gorm:"按钮备注"`
 	SysBaseMenuID uint   `json:"sysBaseMenuID" gorm:"comment:菜单ID"`
 }
+
+func (SysBaseMenuBtn) TableName() string {
+	return "base_menu_btn"
+}

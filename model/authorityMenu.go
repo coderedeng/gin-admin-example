@@ -15,5 +15,5 @@ type SysAuthorityMenu struct {
 }
 
 func (s SysAuthorityMenu) TableName() string {
-	return "authorityMenus"
+	return "authority_menus"
 }

@@ -38,5 +38,9 @@ type SysBaseMenuParameter struct {
 }
 
 func (SysBaseMenu) TableName() string {
-	return "baseMenus"
+	return "base_menus"
+}
+
+func (SysBaseMenuParameter) TableName() string {
+	return "base_menus_parameter"
 }
