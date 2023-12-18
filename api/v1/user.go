@@ -28,7 +28,7 @@ var store = base64Captcha.DefaultMemStore
 // @Produce   application/json
 // @Param    data  body      req.UserRegister                                           true  "用户名, 昵称, 密码, 角色ID"
 // @Success  200   {object}  response.Response{data=res.UserResponse,msg=string}  "用户注册账号,返回包括用户信息"
-// @Router   /api/user/register [post]
+// @Router   /v1/user/register [post]
 func (u *UserApi) Register(c *gin.Context) {
 	var r req.UserRegister
 	err := c.ShouldBindJSON(&r)
@@ -54,7 +54,7 @@ func (u *UserApi) Register(c *gin.Context) {
 // @Produce   application/json
 // @Param    data  body      req.UserLogin                                        true  "用户名, 密码, 验证码"
 // @Success  200   {object}  response.Response{data=res.UserResponse,msg=string}  "返回包括用户信息,token,过期时间"
-// @Router   /api/user/login [post]
+// @Router   /v1/user/login [post]
 func (u *UserApi) Login(c *gin.Context) {
 	var l req.UserLogin
 	err := c.ShouldBindJSON(&l)
@@ -163,7 +163,7 @@ func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
 // @accept    application/json
 // @Produce   application/json
 // @Success   200  {object}  response.Response{data=res.SysCaptchaResponse,msg=string}  "生成验证码,返回包括随机数id,base64,验证码长度,是否开启验证码"
-// @Router    /api/user/captcha [post]
+// @Router    /v1/user/captcha [post]
 func (u *UserApi) Captcha(c *gin.Context) {
 	// 判断验证码是否开启
 	openCaptcha := global.GVA_CONFIG.Captcha.OpenCaptcha               // 是否开启防爆次数
@@ -216,7 +216,7 @@ func interfaceToInt(v interface{}) (i int) {
 // @Produce   application/json
 // @Param     data  body      request.PageInfo true  "页码, 每页大小"
 // @Success   200  {object}  response.Response{data=response.PageResult,msg=string}  "分页获取用户列表,返回包括列表,总数,页码,每页数量"
-// @Router    /api/user/GetUserList [post]
+// @Router    /v1/user/GetUserList [post]
 func (u *UserApi) GetUserList(c *gin.Context) {
 	var pageInfo request.PageInfo
 
@@ -250,7 +250,7 @@ func (u *UserApi) GetUserList(c *gin.Context) {
 // @Produce   application/json
 // @Param     data  body      request.ChangePassWord true  "账号, 密码, 确认密码"
 // @Success   200  {object}  response.Response{msg=string}  "用户修改密码,返回包括修改成功，失败"
-// @Router    /api/user/ChangePassWord [post]
+// @Router    /v1/user/ChangePassWord [post]
 func (u *UserApi) ChangePassWord(c *gin.Context) {
 	var p req.ChangePassWord
 
@@ -278,7 +278,7 @@ func (u *UserApi) ChangePassWord(c *gin.Context) {
 // @accept    application/json
 // @Produce   application/json
 // @Success   200  {object}  response.Response{data=map[string]interface{},msg=string}  "获取用户信息"
-// @Router    /api/user/GetUserInfo [get]
+// @Router    /v1/user/GetUserInfo [get]
 func (u *UserApi) GetUserInfo(c *gin.Context) {
 	uuid := utils.GetUserUuid(c)
 	userInfo, err := userService.GetUserInfo(uuid)
@@ -298,7 +298,7 @@ func (u *UserApi) GetUserInfo(c *gin.Context) {
 // @Produce   application/json
 // @Param     id  query  uint                true  "用户ID"
 // @Success   200   {object}  response.Response{msg=string}  "删除用户"
-// @Router    /api/user/DeleteUser [delete]
+// @Router    /v1/user/DeleteUser [delete]
 func (u *UserApi) DeleteUser(c *gin.Context) {
 	id, err := strconv.ParseUint(c.Query("id"), 10, 64)
 	if err != nil {
@@ -329,7 +329,7 @@ func (u *UserApi) DeleteUser(c *gin.Context) {
 // @Produce   application/json
 // @Param     id  query  uint                true  "用户ID"
 // @Success   200   {object}  response.Response{msg=string}  "重置用户密码"
-// @Router    /api/user/ResetPassword [get]
+// @Router    /v1/user/ResetPassword [get]
 func (u *UserApi) ResetPassword(c *gin.Context) {
 	id, err := strconv.ParseUint(c.Query("id"), 10, 64)
 	if err != nil {
@@ -344,4 +344,146 @@ func (u *UserApi) ResetPassword(c *gin.Context) {
 		return
 	}
 	response.OkWithMessage("重置成功", c)
+}
+
+// SetUserAuthority
+// @Tags      User
+// @Summary   更改用户权限
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     data  body      req.SetUserAuth          true  "用户UUID, 角色ID"
+// @Success   200   {object}  response.Response{msg=string}  "设置用户权限"
+// @Router    /v1/user/setUserAuthority [post]
+func (u *UserApi) SetUserAuthority(c *gin.Context) {
+	var sua req.SetUserAuth
+	err := c.ShouldBindJSON(&sua)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	userID := utils.GetUserID(c)
+	err = userService.SetUserAuthority(userID, sua.AuthorityId)
+	if err != nil {
+		global.GVA_LOG.Error("修改失败!", zap.Error(err))
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	claims := utils.GetUserInfo(c)
+	j := &utils.JWT{SigningKey: []byte(global.GVA_CONFIG.JWT.SigningKey)} // 唯一签名
+	claims.AuthorityId = sua.AuthorityId
+	if token, err := j.CreateToken(*claims); err != nil {
+		global.GVA_LOG.Error("修改失败!", zap.Error(err))
+		response.FailWithMessage(err.Error(), c)
+	} else {
+		c.Header("new-token", token)
+		c.Header("new-expires-at", strconv.FormatInt(claims.ExpiresAt.Unix(), 10))
+		response.OkWithMessage("修改成功", c)
+	}
+}
+
+// SetUserAuthorities
+// @Tags      User
+// @Summary   设置用户权限
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     data  body      req.SetUserAuthorities   true  "用户UUID, 角色ID"
+// @Success   200   {object}  response.Response{msg=string}  "设置用户权限"
+// @Router    /v1/user/setUserAuthorities [post]
+func (u *UserApi) SetUserAuthorities(c *gin.Context) {
+	var sua req.SetUserAuthorities
+	err := c.ShouldBindJSON(&sua)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	err = userService.SetUserAuthorities(sua.ID, sua.AuthorityIds)
+	if err != nil {
+		global.GVA_LOG.Error("修改失败!", zap.Error(err))
+		response.FailWithMessage("修改失败", c)
+		return
+	}
+	response.OkWithMessage("修改成功", c)
+}
+
+// SetUserInfo
+// @Tags      User
+// @Summary   设置用户信息
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     data  body      model.SysUser                                             true  "ID, 用户名, 昵称, 头像链接"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "设置用户信息"
+// @Router    /v1/user/setUserInfo [put]
+func (u *UserApi) SetUserInfo(c *gin.Context) {
+	var user req.ChangeUserInfo
+	err := c.ShouldBindJSON(&user)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	if len(user.AuthorityIds) != 0 {
+		err = userService.SetUserAuthorities(user.ID, user.AuthorityIds)
+		if err != nil {
+			global.GVA_LOG.Error("设置失败!", zap.Error(err))
+			response.FailWithMessage("设置失败", c)
+			return
+		}
+	}
+	err = userService.SetUserInfo(model.SysUser{
+		GVA_MODEL: global.GVA_MODEL{
+			ID: user.ID,
+		},
+		NickName:  user.NickName,
+		HeaderImg: user.HeaderImg,
+		Phone:     user.Phone,
+		Email:     user.Email,
+		SideMode:  user.SideMode,
+		Enable:    user.Enable,
+	})
+	if err != nil {
+		global.GVA_LOG.Error("设置失败!", zap.Error(err))
+		response.FailWithMessage("设置失败", c)
+		return
+	}
+	response.OkWithMessage("设置成功", c)
+}
+
+// SetSelfInfo
+// @Tags      User
+// @Summary   设置用户信息
+// @Security  ApiKeyAuth
+// @accept    application/json
+// @Produce   application/json
+// @Param     data  body      model.SysUser                                             true  "ID, 用户名, 昵称, 头像链接"
+// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "设置用户信息"
+// @Router    /v1/user/SetSelfInfo [put]
+func (u *UserApi) SetSelfInfo(c *gin.Context) {
+	var user req.ChangeUserInfo
+	err := c.ShouldBindJSON(&user)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	user.ID = utils.GetUserID(c)
+	err = userService.SetSelfInfo(model.SysUser{
+		GVA_MODEL: global.GVA_MODEL{
+			ID: user.ID,
+		},
+		NickName:  user.NickName,
+		HeaderImg: user.HeaderImg,
+		Phone:     user.Phone,
+		Email:     user.Email,
+		SideMode:  user.SideMode,
+		Enable:    user.Enable,
+	})
+	if err != nil {
+		global.GVA_LOG.Error("设置失败!", zap.Error(err))
+		response.FailWithMessage("设置失败", c)
+		return
+	}
+	response.OkWithMessage("设置成功", c)
 }

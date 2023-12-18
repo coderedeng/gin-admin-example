@@ -1,9 +1,243 @@
 definitions:
+  model.Meta:
+    properties:
+      activeName:
+        type: string
+      closeTab:
+        description: 自动关闭tab
+        type: boolean
+      defaultMenu:
+        description: 是否是基础路由（开发中）
+        type: boolean
+      icon:
+        description: 菜单图标
+        type: string
+      keepAlive:
+        description: 是否缓存
+        type: boolean
+      title:
+        description: 菜单名
+        type: string
+    type: object
+  model.SysApi:
+    properties:
+      apiGroup:
+        description: api组
+        type: string
+      createdAt:
+        description: 创建时间
+        type: string
+      description:
+        description: api中文描述
+        type: string
+      id:
+        description: 主键ID
+        type: integer
+      method:
+        description: 方法:创建POST(默认)|查看GET|更新PUT|删除DELETE
+        type: string
+      path:
+        description: api路径
+        type: string
+      updatedAt:
+        description: 更新时间
+        type: string
+    type: object
+  model.SysAuthority:
+    properties:
+      authorityId:
+        description: 角色ID
+        type: integer
+      authorityName:
+        description: 角色名
+        type: string
+      children:
+        items:
+          $ref: '#/definitions/model.SysAuthority'
+        type: array
+      createdAt:
+        description: 创建时间
+        type: string
+      dataAuthorityId:
+        items:
+          $ref: '#/definitions/model.SysAuthority'
+        type: array
+      defaultRouter:
+        description: 默认菜单(默认dashboard)
+        type: string
+      deletedAt:
+        type: string
+      menus:
+        items:
+          $ref: '#/definitions/model.SysBaseMenu'
+        type: array
+      parentId:
+        description: 父角色ID
+        type: integer
+      updatedAt:
+        description: 更新时间
+        type: string
+    type: object
+  model.SysBaseMenu:
+    properties:
+      authoritys:
+        items:
+          $ref: '#/definitions/model.SysAuthority'
+        type: array
+      children:
+        items:
+          $ref: '#/definitions/model.SysBaseMenu'
+        type: array
+      component:
+        description: 对应前端文件路径
+        type: string
+      createdAt:
+        description: 创建时间
+        type: string
+      hidden:
+        description: 是否在列表隐藏
+        type: boolean
+      id:
+        description: 主键ID
+        type: integer
+      menuBtn:
+        items:
+          $ref: '#/definitions/model.SysBaseMenuBtn'
+        type: array
+      meta:
+        allOf:
+        - $ref: '#/definitions/model.Meta'
+        description: 附加属性
+      name:
+        description: 路由name
+        type: string
+      parameters:
+        items:
+          $ref: '#/definitions/model.SysBaseMenuParameter'
+        type: array
+      parentId:
+        description: 父菜单ID
+        type: string
+      path:
+        description: 路由path
+        type: string
+      sort:
+        description: 排序标记
+        type: integer
+      updatedAt:
+        description: 更新时间
+        type: string
+    type: object
+  model.SysBaseMenuBtn:
+    properties:
+      createdAt:
+        description: 创建时间
+        type: string
+      desc:
+        type: string
+      id:
+        description: 主键ID
+        type: integer
+      name:
+        type: string
+      sysBaseMenuID:
+        type: integer
+      updatedAt:
+        description: 更新时间
+        type: string
+    type: object
+  model.SysBaseMenuParameter:
+    properties:
+      createdAt:
+        description: 创建时间
+        type: string
+      id:
+        description: 主键ID
+        type: integer
+      key:
+        description: 地址栏携带参数的key
+        type: string
+      sysBaseMenuID:
+        type: integer
+      type:
+        description: 地址栏携带参数为params还是query
+        type: string
+      updatedAt:
+        description: 更新时间
+        type: string
+      value:
+        description: 地址栏携带参数的值
+        type: string
+    type: object
+  model.SysMenu:
+    properties:
+      authoritys:
+        items:
+          $ref: '#/definitions/model.SysAuthority'
+        type: array
+      btns:
+        additionalProperties:
+          type: integer
+        type: object
+      children:
+        items:
+          $ref: '#/definitions/model.SysMenu'
+        type: array
+      component:
+        description: 对应前端文件路径
+        type: string
+      createdAt:
+        description: 创建时间
+        type: string
+      hidden:
+        description: 是否在列表隐藏
+        type: boolean
+      id:
+        description: 主键ID
+        type: integer
+      menuBtn:
+        items:
+          $ref: '#/definitions/model.SysBaseMenuBtn'
+        type: array
+      menuId:
+        type: string
+      meta:
+        allOf:
+        - $ref: '#/definitions/model.Meta'
+        description: 附加属性
+      name:
+        description: 路由name
+        type: string
+      parameters:
+        items:
+          $ref: '#/definitions/model.SysBaseMenuParameter'
+        type: array
+      parentId:
+        description: 父菜单ID
+        type: string
+      path:
+        description: 路由path
+        type: string
+      sort:
+        description: 排序标记
+        type: integer
+      updatedAt:
+        description: 更新时间
+        type: string
+    type: object
   model.SysUser:
     properties:
       activeColor:
-        description: 活跃颜色
         type: string
+      authorities:
+        items:
+          $ref: '#/definitions/model.SysAuthority'
+        type: array
+      authority:
+        $ref: '#/definitions/model.SysAuthority'
+      authorityId:
+        description: 用户角色ID
+        type: integer
       baseColor:
         description: 基础颜色
         type: string
@@ -29,7 +263,7 @@ definitions:
         description: 用户登录密码
         type: string
       phone:
-        description: 用户手机号
+        description: 活跃颜色
         type: string
       sideMode:
         description: 用户侧边主题
@@ -44,6 +278,35 @@ definitions:
         description: 用户UUID
         type: string
     type: object
+  request.AddMenuAuthorityInfo:
+    properties:
+      authorityId:
+        description: 角色ID
+        type: integer
+      menus:
+        items:
+          $ref: '#/definitions/model.SysBaseMenu'
+        type: array
+    type: object
+  request.CasbinInReceive:
+    properties:
+      authorityId:
+        description: 权限id
+        type: integer
+      casbinInfos:
+        items:
+          $ref: '#/definitions/request.CasbinInfo'
+        type: array
+    type: object
+  request.CasbinInfo:
+    properties:
+      method:
+        description: 方法
+        type: string
+      path:
+        description: 路径
+        type: string
+    type: object
   request.ChangePassWord:
     properties:
       confirmPassword:
@@ -52,6 +315,27 @@ definitions:
       passWord:
         example: 密码
         type: string
+    type: object
+  request.Empty:
+    type: object
+  request.GetAuthorityId:
+    properties:
+      authorityId:
+        description: 角色ID
+        type: integer
+    type: object
+  request.GetById:
+    properties:
+      id:
+        description: 主键ID
+        type: integer
+    type: object
+  request.IdsReq:
+    properties:
+      ids:
+        items:
+          type: integer
+        type: array
     type: object
   request.PageInfo:
     properties:
@@ -64,6 +348,72 @@ definitions:
       pageSize:
         description: 每页大小
         type: integer
+    type: object
+  request.SearchApiParams:
+    properties:
+      apiGroup:
+        description: api组
+        type: string
+      createdAt:
+        description: 创建时间
+        type: string
+      desc:
+        description: 排序方式:升序false(默认)|降序true
+        type: boolean
+      description:
+        description: api中文描述
+        type: string
+      id:
+        description: 主键ID
+        type: integer
+      keyword:
+        description: 关键字
+        type: string
+      method:
+        description: 方法:创建POST(默认)|查看GET|更新PUT|删除DELETE
+        type: string
+      orderKey:
+        description: 排序
+        type: string
+      page:
+        description: 页码
+        type: integer
+      pageSize:
+        description: 每页大小
+        type: integer
+      path:
+        description: api路径
+        type: string
+      updatedAt:
+        description: 更新时间
+        type: string
+    type: object
+  request.SetUserAuth:
+    properties:
+      authorityId:
+        description: 角色ID
+        type: integer
+    type: object
+  request.SetUserAuthorities:
+    properties:
+      authorityIds:
+        description: 角色ID
+        items:
+          type: integer
+        type: array
+      id:
+        type: integer
+    type: object
+  request.SysAuthorityBtnReq:
+    properties:
+      authorityId:
+        type: integer
+      menuID:
+        type: integer
+      selected:
+        items:
+          type: integer
+        type: array
     type: object
   request.UserLogin:
     properties:
@@ -114,6 +464,13 @@ definitions:
       total:
         type: integer
     type: object
+  response.PolicyPathResponse:
+    properties:
+      paths:
+        items:
+          $ref: '#/definitions/request.CasbinInfo'
+        type: array
+    type: object
   response.Response:
     properties:
       code:
@@ -121,6 +478,50 @@ definitions:
       data: {}
       msg:
         type: string
+    type: object
+  response.SysAPIListResponse:
+    properties:
+      apis:
+        items:
+          $ref: '#/definitions/model.SysApi'
+        type: array
+    type: object
+  response.SysAPIResponse:
+    properties:
+      api:
+        $ref: '#/definitions/model.SysApi'
+    type: object
+  response.SysAuthorityBtnRes:
+    properties:
+      selected:
+        items:
+          type: integer
+        type: array
+    type: object
+  response.SysAuthorityCopyResponse:
+    properties:
+      authority:
+        $ref: '#/definitions/model.SysAuthority'
+      oldAuthorityId:
+        description: 旧角色ID
+        type: integer
+    type: object
+  response.SysAuthorityResponse:
+    properties:
+      authority:
+        $ref: '#/definitions/model.SysAuthority'
+    type: object
+  response.SysBaseMenuResponse:
+    properties:
+      menu:
+        $ref: '#/definitions/model.SysBaseMenu'
+    type: object
+  response.SysBaseMenusResponse:
+    properties:
+      menus:
+        items:
+          $ref: '#/definitions/model.SysBaseMenu'
+        type: array
     type: object
   response.SysCaptchaResponse:
     properties:
@@ -133,6 +534,13 @@ definitions:
       picPath:
         type: string
     type: object
+  response.SysMenusResponse:
+    properties:
+      menus:
+        items:
+          $ref: '#/definitions/model.SysMenu'
+        type: array
+    type: object
   response.UserResponse:
     properties:
       user:
@@ -141,7 +549,793 @@ definitions:
 info:
   contact: {}
 paths:
-  /api/user/ChangePassWord:
+  /v1/api/createApi:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysApi'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 创建基础api
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 创建基础api
+      tags:
+      - SysApi
+  /v1/api/deleteApi:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysApi'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除api
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 删除api
+      tags:
+      - SysApi
+  /v1/api/deleteApisByIds:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.IdsReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除选中Api
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 删除选中Api
+      tags:
+      - SysApi
+  /v1/api/getAllApis:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取所有的Api 不分页,返回包括api列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysAPIListResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取所有的Api 不分页
+      tags:
+      - SysApi
+  /v1/api/getApiById:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 根据id获取api
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetById'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 根据id获取api,返回包括api详情
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysAPIResponse'
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id获取api
+      tags:
+      - SysApi
+  /v1/api/getApiList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 分页获取API列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.SearchApiParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 分页获取API列表,返回包括列表,总数,页码,每页数量
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 分页获取API列表
+      tags:
+      - SysApi
+  /v1/api/updateApi:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysApi'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 修改基础api
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 修改基础api
+      tags:
+      - SysApi
+  /v1/authority/copyAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 旧角色id, 新权限id, 新权限名, 新父角色id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/response.SysAuthorityCopyResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 拷贝角色,返回包括系统角色详情
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysAuthorityResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 拷贝角色
+      tags:
+      - Authority
+  /v1/authority/createAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 权限id, 权限名, 父角色id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysAuthority'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 创建角色,返回包括系统角色详情
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysAuthorityResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 创建角色
+      tags:
+      - Authority
+  /v1/authority/deleteAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 删除角色
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysAuthority'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除角色
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 删除角色
+      tags:
+      - Authority
+  /v1/authority/getAuthorityList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 页码, 每页大小
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.PageInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 分页获取角色列表,返回包括列表,总数,页码,每页数量
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 分页获取角色列表
+      tags:
+      - Authority
+  /v1/authority/setDataAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 设置角色资源权限
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysAuthority'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 设置角色资源权限
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 设置角色资源权限
+      tags:
+      - Authority
+  /v1/authority/updateAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 权限id, 权限名, 父角色id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysAuthority'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新角色信息,返回包括系统角色详情
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysAuthorityResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更新角色信息
+      tags:
+      - Authority
+  /v1/authorityBtn/canRemoveAuthorityBtn:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 设置权限按钮
+      tags:
+      - AuthorityBtn
+  /v1/authorityBtn/getAuthorityBtn:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 菜单id, 角色id, 选中的按钮id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.SysAuthorityBtnReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 返回列表成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysAuthorityBtnRes'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取权限按钮
+      tags:
+      - AuthorityBtn
+  /v1/authorityBtn/setAuthorityBtn:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 菜单id, 角色id, 选中的按钮id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.SysAuthorityBtnReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 返回列表成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 设置权限按钮
+      tags:
+      - AuthorityBtn
+  /v1/casbin/UpdateCasbin:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 权限id, 权限模型列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.CasbinInReceive'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新角色api权限
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更新角色api权限
+      tags:
+      - Casbin
+  /v1/casbin/getPolicyPathByAuthorityId:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 权限id, 权限模型列表
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.CasbinInReceive'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取权限列表,返回包括casbin详情列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PolicyPathResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取权限列表
+      tags:
+      - Casbin
+  /v1/jwt/jsonInBlacklist:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: jwt加入黑名单
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: jwt加入黑名单
+      tags:
+      - Jwt
+  /v1/menu/addBaseMenu:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 路由path, 父菜单ID, 路由name, 对应前端文件路径, 排序标记
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysBaseMenu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 新增菜单
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 新增菜单
+      tags:
+      - Menu
+  /v1/menu/addMenuAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 角色ID
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.AddMenuAuthorityInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 增加menu和角色关联关系
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 增加menu和角色关联关系
+      tags:
+      - AuthorityMenu
+  /v1/menu/deleteBaseMenu:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 菜单id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetById'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除菜单
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 删除菜单
+      tags:
+      - Menu
+  /v1/menu/getBaseMenuById:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 菜单id
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetById'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 根据id获取菜单,返回包括系统菜单列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysBaseMenuResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id获取菜单
+      tags:
+      - Menu
+  /v1/menu/getBaseMenuTree:
+    post:
+      parameters:
+      - description: 空
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.Empty'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取用户动态路由,返回包括系统菜单列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysBaseMenusResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户动态路由
+      tags:
+      - AuthorityMenu
+  /v1/menu/getMenu:
+    post:
+      parameters:
+      - description: 空
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.Empty'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取用户动态路由,返回包括系统菜单详情列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.SysMenusResponse'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户动态路由
+      tags:
+      - AuthorityMenu
+  /v1/menu/getMenuAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 角色ID
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetAuthorityId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取指定角色menu
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  additionalProperties: true
+                  type: object
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取指定角色menu
+      tags:
+      - AuthorityMenu
+  /v1/menu/getMenuList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 页码, 每页大小
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.PageInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 分页获取基础menu列表,返回包括列表,总数,页码,每页数量
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/response.PageResult'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 分页获取基础menu列表
+      tags:
+      - Menu
+  /v1/menu/updateBaseMenu:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 路由path, 父菜单ID, 路由name, 对应前端文件路径, 排序标记
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysBaseMenu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新菜单
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更新菜单
+      tags:
+      - Menu
+  /v1/user/ChangePassWord:
     post:
       consumes:
       - application/json
@@ -169,7 +1363,7 @@ paths:
       summary: 用户修改密码
       tags:
       - User
-  /api/user/DeleteUser:
+  /v1/user/DeleteUser:
     delete:
       consumes:
       - application/json
@@ -196,7 +1390,7 @@ paths:
       summary: 删除用户
       tags:
       - User
-  /api/user/GetUserInfo:
+  /v1/user/GetUserInfo:
     get:
       consumes:
       - application/json
@@ -220,7 +1414,7 @@ paths:
       summary: 获取用户信息
       tags:
       - User
-  /api/user/GetUserList:
+  /v1/user/GetUserList:
     post:
       consumes:
       - application/json
@@ -250,7 +1444,7 @@ paths:
       summary: 获取系统用户列表
       tags:
       - User
-  /api/user/ResetPassword:
+  /v1/user/ResetPassword:
     get:
       parameters:
       - description: 用户ID
@@ -275,7 +1469,38 @@ paths:
       summary: 重置用户密码
       tags:
       - User
-  /api/user/captcha:
+  /v1/user/SetSelfInfo:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID, 用户名, 昵称, 头像链接
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 设置用户信息
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  additionalProperties: true
+                  type: object
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 设置用户信息
+      tags:
+      - User
+  /v1/user/captcha:
     post:
       consumes:
       - application/json
@@ -296,7 +1521,7 @@ paths:
       summary: 生成验证码
       tags:
       - User
-  /api/user/login:
+  /v1/user/login:
     post:
       parameters:
       - description: 用户名, 密码, 验证码
@@ -322,7 +1547,7 @@ paths:
       summary: 用户登录
       tags:
       - User
-  /api/user/register:
+  /v1/user/register:
     post:
       parameters:
       - description: 用户名, 昵称, 密码, 角色ID
@@ -346,6 +1571,93 @@ paths:
                   type: string
               type: object
       summary: 用户注册账号
+      tags:
+      - User
+  /v1/user/setUserAuthorities:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户UUID, 角色ID
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.SetUserAuthorities'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 设置用户权限
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 设置用户权限
+      tags:
+      - User
+  /v1/user/setUserAuthority:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户UUID, 角色ID
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.SetUserAuth'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 设置用户权限
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更改用户权限
+      tags:
+      - User
+  /v1/user/setUserInfo:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID, 用户名, 昵称, 头像链接
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/model.SysUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 设置用户信息
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  additionalProperties: true
+                  type: object
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 设置用户信息
       tags:
       - User
 swagger: "2.0"

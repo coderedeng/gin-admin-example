@@ -1,8 +1,0 @@
-[ginProject]2023/12/04 - 16:53:52.288	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/user.go:222	获取系统用户列表失败!	{"error": "获取用户列表失败！"}
-[ginProject]2023/12/04 - 16:55:04.844	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/user.go:222	获取系统用户列表失败!	{"error": "获取用户列表失败！"}
-[ginProject]2023/12/04 - 16:58:21.984	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/user.go:222	获取系统用户列表失败!	{"error": "获取用户列表失败！"}
-[ginProject]2023/12/04 - 17:01:06.994	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/user.go:222	获取系统用户列表失败!	{"error": "获取用户列表失败！"}
-[ginProject]2023/12/04 - 17:01:14.212	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/user.go:222	获取系统用户列表失败!	{"error": "获取用户列表失败！"}
-[ginProject]2023/12/04 - 17:02:10.921	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/user.go:222	获取系统用户列表失败!	{"error": "获取用户列表失败！"}
-[ginProject]2023/12/04 - 17:02:30.042	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/user.go:222	获取系统用户列表失败!	{"error": "获取用户列表失败！"}
-[ginProject]2023/12/04 - 17:58:25.617	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/user.go:43	注册失败!	{"error": "用户名已注册"}

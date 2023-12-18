@@ -1,0 +1,5 @@
+[ginProject]2023/12/18 - 15:06:35.587	[31merror[0m	C:/Users/99285/Desktop/ginProject/initialize/gorm.go:25	register table failed	{"error": "错误: 没有唯一约束与关联表 \"users\" 给定的键值匹配 (SQLSTATE 42830)"}
+[ginProject]2023/12/18 - 15:07:32.676	[31merror[0m	C:/Users/99285/Desktop/ginProject/initialize/gorm.go:25	register table failed	{"error": "错误: 没有唯一约束与关联表 \"users\" 给定的键值匹配 (SQLSTATE 42830)"}
+[ginProject]2023/12/18 - 15:08:28.029	[31merror[0m	C:/Users/99285/Desktop/ginProject/initialize/gorm.go:25	register table failed	{"error": "错误: 没有唯一约束与关联表 \"users\" 给定的键值匹配 (SQLSTATE 42830)"}
+[ginProject]2023/12/18 - 15:14:57.415	[31merror[0m	C:/Users/99285/Desktop/ginProject/initialize/gorm.go:25	register table failed	{"error": "错误: 没有唯一约束与关联表 \"users\" 给定的键值匹配 (SQLSTATE 42830)"}
+[ginProject]2023/12/18 - 15:40:44.529	[31merror[0m	C:/Users/99285/Desktop/ginProject/api/v1/api.go:162	获取失败!	{"error": "错误: 关系 \"apis\" 不存在 (SQLSTATE 42P01)"}

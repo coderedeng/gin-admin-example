@@ -9,6 +9,7 @@ import (
 	"ginProject/utils"
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/gorm"
+	"time"
 )
 
 type UserService struct{}
@@ -116,4 +117,109 @@ func (userService *UserService) DeleteUser(id uint) (err error) {
 func (userService *UserService) ResetPassword(id uint) (err error) {
 	err = global.GVA_DB.Model(&model.SysUser{}).Where("id = ?", id).Update("password", utils.BcryptHash("123456")).Error
 	return err
+}
+
+//@author: [piexlmax](https://github.com/piexlmax)
+//@function: SetUserAuthority
+//@description: 设置一个用户的权限
+//@param: uuid uuid.UUID, authorityId string
+//@return: err error
+
+func (userService *UserService) SetUserAuthority(id uint, authorityId uint) (err error) {
+	assignErr := global.GVA_DB.Where("sys_user_id = ? AND sys_authority_authority_id = ?", id, authorityId).First(&model.SysUserAuthority{}).Error
+	if errors.Is(assignErr, gorm.ErrRecordNotFound) {
+		return errors.New("该用户无此角色")
+	}
+	err = global.GVA_DB.Where("id = ?", id).First(&model.SysUser{}).Update("authority_id", authorityId).Error
+	return err
+}
+
+//@author: [piexlmax](https://github.com/piexlmax)
+//@function: SetUserAuthorities
+//@description: 设置一个用户的权限
+//@param: id uint, authorityIds []string
+//@return: err error
+
+func (userService *UserService) SetUserAuthorities(id uint, authorityIds []uint) (err error) {
+	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+		TxErr := tx.Delete(&[]model.SysUserAuthority{}, "sys_user_id = ?", id).Error
+		if TxErr != nil {
+			return TxErr
+		}
+		var useAuthority []model.SysUserAuthority
+		for _, v := range authorityIds {
+			useAuthority = append(useAuthority, model.SysUserAuthority{
+				SysUserId: id, SysAuthorityAuthorityId: v,
+			})
+		}
+		TxErr = tx.Create(&useAuthority).Error
+		if TxErr != nil {
+			return TxErr
+		}
+		TxErr = tx.Where("id = ?", id).First(&model.SysUser{}).Update("authority_id", authorityIds[0]).Error
+		if TxErr != nil {
+			return TxErr
+		}
+		// 返回 nil 提交事务
+		return nil
+	})
+}
+
+//@author: [piexlmax](https://github.com/piexlmax)
+//@function: SetUserInfo
+//@description: 设置用户信息
+//@param: reqUser model.SysUser
+//@return: err error, user model.SysUser
+
+func (userService *UserService) SetUserInfo(req model.SysUser) error {
+	return global.GVA_DB.Model(&model.SysUser{}).
+		Select("updated_at", "nick_name", "header_img", "phone", "email", "sideMode", "enable").
+		Where("id=?", req.ID).
+		Updates(map[string]interface{}{
+			"updated_at": time.Now(),
+			"nick_name":  req.NickName,
+			"header_img": req.HeaderImg,
+			"phone":      req.Phone,
+			"email":      req.Email,
+			"side_mode":  req.SideMode,
+			"enable":     req.Enable,
+		}).Error
+}
+
+//@author: [piexlmax](https://github.com/piexlmax)
+//@function: SetUserInfo
+//@description: 设置用户信息
+//@param: reqUser model.SysUser
+//@return: err error, user model.SysUser
+
+func (userService *UserService) SetSelfInfo(req model.SysUser) error {
+	return global.GVA_DB.Model(&model.SysUser{}).
+		Where("id=?", req.ID).
+		Updates(req).Error
+}
+
+//@author: [SliverHorn](https://github.com/SliverHorn)
+//@function: FindUserById
+//@description: 通过id获取用户信息
+//@param: id int
+//@return: err error, user *model.SysUser
+
+func (userService *UserService) FindUserById(id int) (user *model.SysUser, err error) {
+	var u model.SysUser
+	err = global.GVA_DB.Where("`id` = ?", id).First(&u).Error
+	return &u, err
+}
+
+//@author: [SliverHorn](https://github.com/SliverHorn)
+//@function: FindUserByUuid
+//@description: 通过uuid获取用户信息
+//@param: uuid string
+//@return: err error, user *model.SysUser
+
+func (userService *UserService) FindUserByUuid(uuid string) (user *model.SysUser, err error) {
+	var u model.SysUser
+	if err = global.GVA_DB.Where("`uuid` = ?", uuid).First(&u).Error; err != nil {
+		return &u, errors.New("用户不存在")
+	}
+	return &u, nil
 }

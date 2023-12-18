@@ -24,7 +24,13 @@ func Routers() *gin.Engine {
 	PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
 	//PrivateGroup.Use(middleware.JWTAuth())
 	{
-		router.RouterGroupApp.InitUserRouter(PrivateGroup) // 初始化用户路由
+		router.RouterGroupApp.InitUserRouter(PrivateGroup)               // 初始化用户路由
+		router.RouterGroupApp.InitApiRouter(PrivateGroup)                // 初始化Api路由
+		router.RouterGroupApp.InitAuthorityRouter(PrivateGroup)          // 初始化用户角色路由
+		router.RouterGroupApp.InitAuthorityBtnRouterRouter(PrivateGroup) // 初始化用户角色按钮路由
+		router.RouterGroupApp.InitCasbinRouter(PrivateGroup)             // 初始化Casbin路由
+		router.RouterGroupApp.InitJwtRouter(PrivateGroup)                // 初始化JWT路由
+		router.RouterGroupApp.InitMenuRouter(PrivateGroup)               // 初始化菜单路由
 	}
 	return Router
 
