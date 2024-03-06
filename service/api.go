@@ -3,9 +3,9 @@ package service
 import (
 	"errors"
 	"fmt"
-	"ginProject/global"
-	"ginProject/model"
-	"ginProject/model/common/request"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model"
+	"github.com/coderedeng/gin-admin-example/model/common/request"
 
 	"gorm.io/gorm"
 )

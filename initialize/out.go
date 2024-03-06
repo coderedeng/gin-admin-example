@@ -3,8 +3,8 @@ package initialize
 import (
 	"github.com/songzhibin97/gkit/cache/local_cache"
 
-	"ginProject/global"
-	"ginProject/utils"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/utils"
 )
 
 func OtherInit() {

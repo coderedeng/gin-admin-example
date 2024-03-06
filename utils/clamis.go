@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"ginProject/global"
-	req "ginProject/model/request"
+	"github.com/coderedeng/gin-admin-example/global"
+	req "github.com/coderedeng/gin-admin-example/model/request"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 )

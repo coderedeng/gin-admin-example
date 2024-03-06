@@ -2,10 +2,10 @@ package service
 
 import (
 	"context"
-	"ginProject/model"
+	"github.com/coderedeng/gin-admin-example/model"
 
-	"ginProject/global"
-	"ginProject/utils"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/utils"
 	"go.uber.org/zap"
 )
 

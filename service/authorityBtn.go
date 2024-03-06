@@ -2,10 +2,10 @@ package service
 
 import (
 	"errors"
-	"ginProject/global"
-	"ginProject/model"
-	"ginProject/model/request"
-	"ginProject/model/response"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model"
+	"github.com/coderedeng/gin-admin-example/model/request"
+	"github.com/coderedeng/gin-admin-example/model/response"
 	"gorm.io/gorm"
 )
 

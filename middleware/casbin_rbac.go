@@ -4,10 +4,10 @@ import (
 	"strconv"
 	"strings"
 
-	"ginProject/global"
-	"ginProject/model/common/response"
-	"ginProject/service"
-	"ginProject/utils"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model/common/response"
+	"github.com/coderedeng/gin-admin-example/service"
+	"github.com/coderedeng/gin-admin-example/utils"
 	"github.com/gin-gonic/gin"
 )
 

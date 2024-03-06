@@ -2,8 +2,8 @@ package core
 
 import (
 	"fmt"
-	"ginProject/global"
-	"ginProject/initialize"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/initialize"
 	"go.uber.org/zap"
 )
 

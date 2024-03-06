@@ -1,6 +1,6 @@
 package request
 
-import "ginProject/model"
+import "github.com/coderedeng/gin-admin-example/model"
 
 // UserRegister User register structure
 type UserRegister struct {

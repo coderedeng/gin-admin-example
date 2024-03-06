@@ -2,9 +2,9 @@ package core
 
 import (
 	"fmt"
-	"ginProject/core/internal"
-	"ginProject/global"
-	"ginProject/utils"
+	"github.com/coderedeng/gin-admin-example/core/internal"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/utils"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"

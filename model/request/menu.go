@@ -1,8 +1,8 @@
 package request
 
 import (
-	"ginProject/global"
-	"ginProject/model"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model"
 )
 
 // Add menu authority info structure

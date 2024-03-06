@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"ginProject/service"
+	"github.com/coderedeng/gin-admin-example/service"
 )
 
 type ApiGroup struct {

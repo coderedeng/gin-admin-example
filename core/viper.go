@@ -2,7 +2,7 @@ package core
 
 import (
 	"fmt"
-	"ginProject/global"
+	"github.com/coderedeng/gin-admin-example/global"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"

@@ -2,16 +2,16 @@ package middleware
 
 import (
 	"errors"
-	"ginProject/model"
+	"github.com/coderedeng/gin-admin-example/model"
 	"github.com/golang-jwt/jwt/v4"
 	"strconv"
 	"time"
 
-	"ginProject/utils"
+	"github.com/coderedeng/gin-admin-example/utils"
 
-	"ginProject/global"
-	"ginProject/model/common/response"
-	"ginProject/service"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model/common/response"
+	"github.com/coderedeng/gin-admin-example/service"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"

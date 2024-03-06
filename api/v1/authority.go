@@ -1,12 +1,12 @@
 package v1
 
 import (
-	"ginProject/global"
-	"ginProject/model"
-	"ginProject/model/common/request"
-	"ginProject/model/common/response"
-	systemReq "ginProject/model/request"
-	systemRes "ginProject/model/response"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model"
+	"github.com/coderedeng/gin-admin-example/model/common/request"
+	"github.com/coderedeng/gin-admin-example/model/common/response"
+	systemReq "github.com/coderedeng/gin-admin-example/model/request"
+	systemRes "github.com/coderedeng/gin-admin-example/model/response"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"

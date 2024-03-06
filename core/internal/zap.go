@@ -2,7 +2,7 @@ package internal
 
 import (
 	"fmt"
-	"ginProject/global"
+	"github.com/coderedeng/gin-admin-example/global"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"time"

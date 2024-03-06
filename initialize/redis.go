@@ -3,7 +3,7 @@ package initialize
 import (
 	"context"
 	"fmt"
-	"ginProject/global"
+	"github.com/coderedeng/gin-admin-example/global"
 	"github.com/go-redis/redis/v8"
 	"go.uber.org/zap"
 )

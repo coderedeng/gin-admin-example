@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"ginProject/global"
-	"ginProject/model/common/response"
-	"ginProject/model/request"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model/common/response"
+	"github.com/coderedeng/gin-admin-example/model/request"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )

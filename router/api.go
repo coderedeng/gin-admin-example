@@ -1,7 +1,7 @@
 package router
 
 import (
-	v1 "ginProject/api/v1"
+	v1 "github.com/coderedeng/gin-admin-example/api/v1"
 	"github.com/gin-gonic/gin"
 )
 

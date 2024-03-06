@@ -1,7 +1,7 @@
 package response
 
 import (
-	"ginProject/model"
+	"github.com/coderedeng/gin-admin-example/model"
 )
 
 type SysAuthorityResponse struct {

@@ -6,8 +6,8 @@ import (
 
 	jwt "github.com/golang-jwt/jwt/v4"
 
-	"ginProject/global"
-	"ginProject/model/request"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model/request"
 )
 
 type JWT struct {

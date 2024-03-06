@@ -1,7 +1,7 @@
 package response
 
 import (
-	"ginProject/model/request"
+	"github.com/coderedeng/gin-admin-example/model/request"
 )
 
 type PolicyPathResponse struct {

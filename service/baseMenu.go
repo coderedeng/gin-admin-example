@@ -3,8 +3,8 @@ package service
 import (
 	"errors"
 
-	"ginProject/global"
-	"ginProject/model"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model"
 	"gorm.io/gorm"
 )
 

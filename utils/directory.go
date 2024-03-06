@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	"ginProject/global"
+	"github.com/coderedeng/gin-admin-example/global"
 	"go.uber.org/zap"
 )
 

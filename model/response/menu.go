@@ -1,6 +1,6 @@
 package response
 
-import "ginProject/model"
+import "github.com/coderedeng/gin-admin-example/model"
 
 type SysMenusResponse struct {
 	Menus []model.SysMenu `json:"menus"`

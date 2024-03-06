@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"ginProject/global"
+	"github.com/coderedeng/gin-admin-example/global"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"go.uber.org/zap/zapcore"
 	"os"

@@ -1,4 +1,4 @@
-module ginProject
+module github.com/coderedeng/gin-admin-example
 
 go 1.20
 

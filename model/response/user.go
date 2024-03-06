@@ -1,6 +1,6 @@
 package response
 
-import "ginProject/model"
+import "github.com/coderedeng/gin-admin-example/model"
 
 type UserResponse struct {
 	User model.SysUser `json:"user"`

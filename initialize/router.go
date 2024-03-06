@@ -1,9 +1,9 @@
 package initialize
 
 import (
-	docs "ginProject/docs"
-	"ginProject/global"
-	"ginProject/router"
+	docs "github.com/coderedeng/gin-admin-example/docs"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/router"
 	"github.com/gin-gonic/gin"
 	"github.com/hononet639/knife4g"
 	swaggerFiles "github.com/swaggo/files"

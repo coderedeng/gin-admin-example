@@ -1,7 +1,7 @@
 package model
 
 import (
-	"ginProject/global"
+	"github.com/coderedeng/gin-admin-example/global"
 )
 
 type JwtBlacklist struct {

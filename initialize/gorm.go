@@ -1,9 +1,9 @@
 package initialize
 
 import (
-	"ginProject/global"
-	"ginProject/model"
 	adapter "github.com/casbin/gorm-adapter/v3"
+	"github.com/coderedeng/gin-admin-example/global"
+	"github.com/coderedeng/gin-admin-example/model"
 	"go.uber.org/zap"
 	"os"
 )

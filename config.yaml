@@ -1,5 +1,5 @@
 system:
-  name: "ginProject"
+  name: "github.com/coderedeng/gin-admin-example"
   port: 8888
   mode: "dev"
   routerPrefix: "/v1"
@@ -20,7 +20,7 @@ pgsql:
   log-zap: false
 zap:
   level: "info"
-  prefix: '[ginProject]'
+  prefix: '[github.com/coderedeng/gin-admin-example]'
   format: console
   director: log
   encode-level: LowercaseColorLevelEncoder

@@ -2,7 +2,7 @@ package initialize
 
 import (
 	"fmt"
-	"ginProject/global"
+	"github.com/coderedeng/gin-admin-example/global"
 	"gorm.io/driver/postgres"
 	_ "gorm.io/driver/postgres"
 	"gorm.io/gorm"

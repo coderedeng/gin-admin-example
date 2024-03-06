@@ -1,6 +1,6 @@
 package model
 
-import "ginProject/global"
+import "github.com/coderedeng/gin-admin-example/global"
 
 type SysBaseMenuBtn struct {
 	global.GVA_MODEL

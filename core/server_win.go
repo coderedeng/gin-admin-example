@@ -5,7 +5,7 @@ package core
 
 import (
 	"context"
-	"ginProject/global"
+	"github.com/coderedeng/gin-admin-example/global"
 	"log"
 	"net/http"
 	"os"

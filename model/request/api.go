@@ -1,8 +1,8 @@
 package request
 
 import (
-	"ginProject/model"
-	"ginProject/model/common/request"
+	"github.com/coderedeng/gin-admin-example/model"
+	"github.com/coderedeng/gin-admin-example/model/common/request"
 )
 
 // SearchApiParams api分页条件查询及排序结构体

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ginProject/core"
+	"github.com/coderedeng/gin-admin-example/core"
 )
 
 func main() {
