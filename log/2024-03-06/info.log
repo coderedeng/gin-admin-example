@@ -1,4 +1,0 @@
-[github.com/coderedeng/gin-admin-example]2024/03/06 - 21:18:04.645	[34minfo[0m	C:/Users/Administrator/Desktop/gin-admin-example-main/initialize/redis.go:24	redis connect ping response:	{"pong": "PONG"}
-[github.com/coderedeng/gin-admin-example]2024/03/06 - 21:18:04.842	[34minfo[0m	C:/Users/Administrator/Desktop/gin-admin-example-main/initialize/gorm.go:32	register table success
-[github.com/coderedeng/gin-admin-example]2024/03/06 - 21:18:04.843	[34minfo[0m	C:/Users/Administrator/Desktop/gin-admin-example-main/initialize/router.go:18	register swagger handler
-[github.com/coderedeng/gin-admin-example]2024/03/06 - 21:18:04.844	[34minfo[0m	C:/Users/Administrator/Desktop/gin-admin-example-main/initialize/router.go:22	register knife4g handler
