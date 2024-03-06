@@ -22,12 +22,12 @@ func Viper() *viper.Viper {
 	// 注意！！！配置文件发生变化后要同步到全局变量Conf
 	v.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Printf("配置文件已修改：,%s", in.Name)
-		if err = v.Unmarshal(&global.GVA_CONFIG); err != nil {
+		if err = v.Unmarshal(&global.GPA_CONFIG); err != nil {
 			fmt.Println(err)
 		}
 	})
 
-	if err = v.Unmarshal(&global.GVA_CONFIG); err != nil {
+	if err = v.Unmarshal(&global.GPA_CONFIG); err != nil {
 		fmt.Println(err)
 	}
 	return v

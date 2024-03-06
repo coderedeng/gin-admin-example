@@ -28,7 +28,7 @@ func initServer(address string, router *gin.Engine) server {
 	go func() {
 		// 开启一个goroutine启动服务
 		if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			global.GVA_LOG.Error(s.ListenAndServe().Error())
+			global.GPA_LOG.Error(s.ListenAndServe().Error())
 		}
 	}()
 

@@ -41,7 +41,7 @@ func (u *UserApi) Register(c *gin.Context) {
 	userReturn, err := userService.Register(*user)
 
 	if err != nil {
-		global.GVA_LOG.Error("注册失败!", zap.Error(err))
+		global.GPA_LOG.Error("注册失败!", zap.Error(err))
 		response.FailWithDetailed(res.UserResponse{User: userReturn}, "注册失败", c)
 		return
 	}
@@ -66,8 +66,8 @@ func (u *UserApi) Login(c *gin.Context) {
 	}
 
 	// 判断验证码是否开启
-	openCaptcha := global.GVA_CONFIG.Captcha.OpenCaptcha               // 是否开启防爆次数
-	openCaptchaTimeOut := global.GVA_CONFIG.Captcha.OpenCaptchaTimeOut // 缓存超时时间
+	openCaptcha := global.GPA_CONFIG.Captcha.OpenCaptcha               // 是否开启防爆次数
+	openCaptchaTimeOut := global.GPA_CONFIG.Captcha.OpenCaptchaTimeOut // 缓存超时时间
 	v, ok := global.BlackCache.Get(key)
 	if !ok {
 		global.BlackCache.Set(key, 1, time.Second*time.Duration(openCaptchaTimeOut))
@@ -79,14 +79,14 @@ func (u *UserApi) Login(c *gin.Context) {
 		sysUser := &model.SysUser{Username: l.Username, Password: l.Password}
 		user, err := userService.Login(sysUser)
 		if err != nil {
-			global.GVA_LOG.Error("登陆失败! 用户名不存在或者密码错误!", zap.Error(err))
+			global.GPA_LOG.Error("登陆失败! 用户名不存在或者密码错误!", zap.Error(err))
 			// 验证码次数+1
 			global.BlackCache.Increment(key, 1)
 			response.FailWithMessage("用户名不存在或者密码错误", c)
 			return
 		}
 		if user.Enable != 1 {
-			global.GVA_LOG.Error("登陆失败! 用户被禁止登录!")
+			global.GPA_LOG.Error("登陆失败! 用户被禁止登录!")
 			// 验证码次数+1
 			global.BlackCache.Increment(key, 1)
 			response.FailWithMessage("用户被禁止登录", c)
@@ -102,7 +102,7 @@ func (u *UserApi) Login(c *gin.Context) {
 
 // TokenNext 登录以后签发jwt
 func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
-	j := &utils.JWT{SigningKey: []byte(global.GVA_CONFIG.JWT.SigningKey)} // 唯一签名
+	j := &utils.JWT{SigningKey: []byte(global.GPA_CONFIG.JWT.SigningKey)} // 唯一签名
 	claims := j.CreateClaims(req.BaseClaims{
 		UUID:     user.UUID,
 		ID:       user.ID,
@@ -111,11 +111,11 @@ func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
 	})
 	token, err := j.CreateToken(claims)
 	if err != nil {
-		global.GVA_LOG.Error("获取token失败!", zap.Error(err))
+		global.GPA_LOG.Error("获取token失败!", zap.Error(err))
 		response.FailWithMessage("获取token失败", c)
 		return
 	}
-	if !global.GVA_CONFIG.System.UseMultipoint {
+	if !global.GPA_CONFIG.System.UseMultipoint {
 		response.OkWithDetailed(res.LoginResponse{
 			User:      user,
 			Token:     token,
@@ -126,7 +126,7 @@ func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
 
 	if jwtStr, err := jwtService.GetRedisJWT(user.Username); err == redis.Nil {
 		if err := jwtService.SetRedisJWT(token, user.Username); err != nil {
-			global.GVA_LOG.Error("设置登录状态失败!", zap.Error(err))
+			global.GPA_LOG.Error("设置登录状态失败!", zap.Error(err))
 			response.FailWithMessage("设置登录状态失败", c)
 			return
 		}
@@ -136,7 +136,7 @@ func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
 			ExpiresAt: claims.RegisteredClaims.ExpiresAt.Unix() * 1000,
 		}, "登录成功", c)
 	} else if err != nil {
-		global.GVA_LOG.Error("设置登录状态失败!", zap.Error(err))
+		global.GPA_LOG.Error("设置登录状态失败!", zap.Error(err))
 		response.FailWithMessage("设置登录状态失败", c)
 	} else {
 		var blackJWT model.JwtBlacklist
@@ -166,8 +166,8 @@ func (u *UserApi) TokenNext(c *gin.Context, user model.SysUser) {
 // @Router    /v1/user/captcha [post]
 func (u *UserApi) Captcha(c *gin.Context) {
 	// 判断验证码是否开启
-	openCaptcha := global.GVA_CONFIG.Captcha.OpenCaptcha               // 是否开启防爆次数
-	openCaptchaTimeOut := global.GVA_CONFIG.Captcha.OpenCaptchaTimeOut // 缓存超时时间
+	openCaptcha := global.GPA_CONFIG.Captcha.OpenCaptcha               // 是否开启防爆次数
+	openCaptchaTimeOut := global.GPA_CONFIG.Captcha.OpenCaptchaTimeOut // 缓存超时时间
 	key := c.ClientIP()
 	v, ok := global.BlackCache.Get(key)
 	if !ok {
@@ -180,19 +180,19 @@ func (u *UserApi) Captcha(c *gin.Context) {
 	}
 	// 字符,公式,验证码配置
 	// 生成默认数字的driver
-	driver := base64Captcha.NewDriverDigit(global.GVA_CONFIG.Captcha.ImgHeight, global.GVA_CONFIG.Captcha.ImgWidth, global.GVA_CONFIG.Captcha.KeyLong, 0.7, 80)
+	driver := base64Captcha.NewDriverDigit(global.GPA_CONFIG.Captcha.ImgHeight, global.GPA_CONFIG.Captcha.ImgWidth, global.GPA_CONFIG.Captcha.KeyLong, 0.7, 80)
 	//cp := base64Captcha.NewCaptcha(driver, store.UseWithCtx(c))   // v8下使用redis
 	cp := base64Captcha.NewCaptcha(driver, store)
 	id, b64s, err := cp.Generate()
 	if err != nil {
-		global.GVA_LOG.Error("验证码获取失败!", zap.Error(err))
+		global.GPA_LOG.Error("验证码获取失败!", zap.Error(err))
 		response.FailWithMessage("验证码获取失败", c)
 		return
 	}
 	response.OkWithDetailed(res.SysCaptchaResponse{
 		CaptchaId:     id,
 		PicPath:       b64s,
-		CaptchaLength: global.GVA_CONFIG.Captcha.KeyLong,
+		CaptchaLength: global.GPA_CONFIG.Captcha.KeyLong,
 		OpenCaptcha:   oc,
 	}, "验证码获取成功", c)
 }
@@ -230,7 +230,7 @@ func (u *UserApi) GetUserList(c *gin.Context) {
 	list, total, err := userService.GetUserList(pageInfo)
 
 	if err != nil {
-		global.GVA_LOG.Error("获取系统用户列表失败!", zap.Error(err))
+		global.GPA_LOG.Error("获取系统用户列表失败!", zap.Error(err))
 		response.FailWithMessage("获取系统用户列表失败!", c)
 		return
 	}
@@ -261,10 +261,10 @@ func (u *UserApi) ChangePassWord(c *gin.Context) {
 		return
 	}
 	uid := utils.GetUserID(c)
-	user := &model.SysUser{GVA_MODEL: global.GVA_MODEL{ID: uid}, Password: p.Password}
+	user := &model.SysUser{GPA_MODEL: global.GPA_MODEL{ID: uid}, Password: p.Password}
 	_, err = userService.ChangePassWord(user, p.ConfirmPassword)
 	if err != nil {
-		global.GVA_LOG.Error("修改失败!", zap.Error(err))
+		global.GPA_LOG.Error("修改失败!", zap.Error(err))
 		response.FailWithMessage("修改失败，原密码与当前账户不符", c)
 		return
 	}
@@ -283,7 +283,7 @@ func (u *UserApi) GetUserInfo(c *gin.Context) {
 	uuid := utils.GetUserUuid(c)
 	userInfo, err := userService.GetUserInfo(uuid)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Error(err))
+		global.GPA_LOG.Error("获取失败!", zap.Error(err))
 		response.FailWithMessage("获取失败", c)
 		return
 	}
@@ -315,7 +315,7 @@ func (u *UserApi) DeleteUser(c *gin.Context) {
 
 	err = userService.DeleteUser(userId)
 	if err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Error(err))
+		global.GPA_LOG.Error("删除失败!", zap.Error(err))
 		response.FailWithMessage("删除失败", c)
 		return
 	}
@@ -339,7 +339,7 @@ func (u *UserApi) ResetPassword(c *gin.Context) {
 	userId := uint(id)
 	err = userService.ResetPassword(userId)
 	if err != nil {
-		global.GVA_LOG.Error("重置失败!", zap.Error(err))
+		global.GPA_LOG.Error("重置失败!", zap.Error(err))
 		response.FailWithMessage("重置失败"+err.Error(), c)
 		return
 	}
@@ -366,15 +366,15 @@ func (u *UserApi) SetUserAuthority(c *gin.Context) {
 	userID := utils.GetUserID(c)
 	err = userService.SetUserAuthority(userID, sua.AuthorityId)
 	if err != nil {
-		global.GVA_LOG.Error("修改失败!", zap.Error(err))
+		global.GPA_LOG.Error("修改失败!", zap.Error(err))
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
 	claims := utils.GetUserInfo(c)
-	j := &utils.JWT{SigningKey: []byte(global.GVA_CONFIG.JWT.SigningKey)} // 唯一签名
+	j := &utils.JWT{SigningKey: []byte(global.GPA_CONFIG.JWT.SigningKey)} // 唯一签名
 	claims.AuthorityId = sua.AuthorityId
 	if token, err := j.CreateToken(*claims); err != nil {
-		global.GVA_LOG.Error("修改失败!", zap.Error(err))
+		global.GPA_LOG.Error("修改失败!", zap.Error(err))
 		response.FailWithMessage(err.Error(), c)
 	} else {
 		c.Header("new-token", token)
@@ -401,7 +401,7 @@ func (u *UserApi) SetUserAuthorities(c *gin.Context) {
 	}
 	err = userService.SetUserAuthorities(sua.ID, sua.AuthorityIds)
 	if err != nil {
-		global.GVA_LOG.Error("修改失败!", zap.Error(err))
+		global.GPA_LOG.Error("修改失败!", zap.Error(err))
 		response.FailWithMessage("修改失败", c)
 		return
 	}
@@ -428,13 +428,13 @@ func (u *UserApi) SetUserInfo(c *gin.Context) {
 	if len(user.AuthorityIds) != 0 {
 		err = userService.SetUserAuthorities(user.ID, user.AuthorityIds)
 		if err != nil {
-			global.GVA_LOG.Error("设置失败!", zap.Error(err))
+			global.GPA_LOG.Error("设置失败!", zap.Error(err))
 			response.FailWithMessage("设置失败", c)
 			return
 		}
 	}
 	err = userService.SetUserInfo(model.SysUser{
-		GVA_MODEL: global.GVA_MODEL{
+		GPA_MODEL: global.GPA_MODEL{
 			ID: user.ID,
 		},
 		NickName:  user.NickName,
@@ -445,7 +445,7 @@ func (u *UserApi) SetUserInfo(c *gin.Context) {
 		Enable:    user.Enable,
 	})
 	if err != nil {
-		global.GVA_LOG.Error("设置失败!", zap.Error(err))
+		global.GPA_LOG.Error("设置失败!", zap.Error(err))
 		response.FailWithMessage("设置失败", c)
 		return
 	}
@@ -470,7 +470,7 @@ func (u *UserApi) SetSelfInfo(c *gin.Context) {
 	}
 	user.ID = utils.GetUserID(c)
 	err = userService.SetSelfInfo(model.SysUser{
-		GVA_MODEL: global.GVA_MODEL{
+		GPA_MODEL: global.GPA_MODEL{
 			ID: user.ID,
 		},
 		NickName:  user.NickName,
@@ -481,7 +481,7 @@ func (u *UserApi) SetSelfInfo(c *gin.Context) {
 		Enable:    user.Enable,
 	})
 	if err != nil {
-		global.GVA_LOG.Error("设置失败!", zap.Error(err))
+		global.GPA_LOG.Error("设置失败!", zap.Error(err))
 		response.FailWithMessage("设置失败", c)
 		return
 	}

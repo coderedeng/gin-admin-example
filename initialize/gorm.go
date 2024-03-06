@@ -10,7 +10,7 @@ import (
 
 // RegisterTables 注册数据库表专用
 func RegisterTables() {
-	db := global.GVA_DB
+	db := global.GPA_DB
 	err := db.AutoMigrate(
 		// 系统模块表
 		model.SysApi{},
@@ -25,9 +25,9 @@ func RegisterTables() {
 	)
 
 	if err != nil {
-		global.GVA_LOG.Error("register table failed", zap.Error(err))
+		global.GPA_LOG.Error("register table failed", zap.Error(err))
 		os.Exit(0)
 	}
 
-	global.GVA_LOG.Info("register table success")
+	global.GPA_LOG.Info("register table success")
 }

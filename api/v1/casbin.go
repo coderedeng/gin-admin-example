@@ -34,7 +34,7 @@ func (cas *CasbinApi) UpdateCasbin(c *gin.Context) {
 	//}
 	err = casbinService.UpdateCasbin(cmr.AuthorityId, cmr.CasbinInfos)
 	if err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Error(err))
+		global.GPA_LOG.Error("更新失败!", zap.Error(err))
 		response.FailWithMessage("更新失败", c)
 		return
 	}

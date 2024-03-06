@@ -15,13 +15,13 @@ func Routers() *gin.Engine {
 	docs.SwaggerInfo.BasePath = ""
 	// swagger文档地址 生成命令 swag init
 	Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	global.GVA_LOG.Info("register swagger handler")
+	global.GPA_LOG.Info("register swagger handler")
 
 	// knife4g文档地址 生成命令 swag init
 	Router.GET("/doc/*any", knife4g.Handler(knife4g.Config{RelativePath: "/doc"}))
-	global.GVA_LOG.Info("register knife4g handler")
+	global.GPA_LOG.Info("register knife4g handler")
 
-	PrivateGroup := Router.Group(global.GVA_CONFIG.System.RouterPrefix)
+	PrivateGroup := Router.Group(global.GPA_CONFIG.System.RouterPrefix)
 	//PrivateGroup.Use(middleware.JWTAuth())
 	{
 		router.RouterGroupApp.InitUserRouter(PrivateGroup)               // 初始化用户路由

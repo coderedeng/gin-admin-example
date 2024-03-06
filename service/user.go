@@ -20,13 +20,13 @@ type UserService struct{}
 // @return: userInter model.SysUser, err error
 func (userService *UserService) Register(u model.SysUser) (userInter model.SysUser, err error) {
 	var user model.SysUser
-	if !errors.Is(global.GVA_DB.Where("username = ?", u.Username).First(&user).Error, gorm.ErrRecordNotFound) { // 判断用户名是否注册
+	if !errors.Is(global.GPA_DB.Where("username = ?", u.Username).First(&user).Error, gorm.ErrRecordNotFound) { // 判断用户名是否注册
 		return userInter, errors.New("用户名已注册")
 	}
 	// 否则 附加uuid 密码hash加密 注册
 	u.Password = utils.BcryptHash(u.Password)
 	u.UUID = uuid.NewV4()
-	err = global.GVA_DB.Create(&u).Error
+	err = global.GPA_DB.Create(&u).Error
 	return u, err
 }
 
@@ -35,12 +35,12 @@ func (userService *UserService) Register(u model.SysUser) (userInter model.SysUs
 // @param: u *model.SysUser
 // @return: userInter *model.SysUser, err error
 func (userService *UserService) Login(u *model.SysUser) (userInter *model.SysUser, err error) {
-	if nil == global.GVA_DB {
+	if nil == global.GPA_DB {
 		return nil, fmt.Errorf("db not init")
 	}
 
 	var user model.SysUser
-	err = global.GVA_DB.Where("username = ?", u.Username).First(&user).Error
+	err = global.GPA_DB.Where("username = ?", u.Username).First(&user).Error
 	if err == nil {
 		if ok := utils.BcryptCheck(u.Password, user.Password); !ok {
 			return nil, errors.New("密码错误")
@@ -56,7 +56,7 @@ func (userService *UserService) Login(u *model.SysUser) (userInter *model.SysUse
 func (userService *UserService) GetUserList(info request.PageInfo) (list interface{}, total int64, err error) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
-	db := global.GVA_DB.Model(&model.SysUser{})
+	db := global.GPA_DB.Model(&model.SysUser{})
 	var userList []model.SysUser
 	err = db.Count(&total).Error
 	if err != nil {
@@ -73,14 +73,14 @@ func (userService *UserService) GetUserList(info request.PageInfo) (list interfa
 // @return: user model.SysUser, err error
 func (userService *UserService) ChangePassWord(u *model.SysUser, newPassword string) (userInter *model.SysUser, err error) {
 	var user model.SysUser
-	if err = global.GVA_DB.Where("id = ?", u.ID).First(&user).Error; err != nil {
+	if err = global.GPA_DB.Where("id = ?", u.ID).First(&user).Error; err != nil {
 		return nil, err
 	}
 	if ok := utils.BcryptCheck(u.Password, user.Password); !ok {
 		return nil, errors.New("原密码错误")
 	}
 	user.Password = utils.BcryptHash(newPassword)
-	err = global.GVA_DB.Save(&user).Error
+	err = global.GPA_DB.Save(&user).Error
 	return &user, err
 }
 
@@ -89,7 +89,7 @@ func (userService *UserService) ChangePassWord(u *model.SysUser, newPassword str
 // @param: uuid uuid.UUID
 // @return: model.SysUser, user err error
 func (userService *UserService) GetUserInfo(uuid uuid.UUID) (user model.SysUser, err error) {
-	err = global.GVA_DB.First(&user, "uuid = ?", uuid).Error
+	err = global.GPA_DB.First(&user, "uuid = ?", uuid).Error
 	if err != nil {
 		return user, err
 	}
@@ -103,7 +103,7 @@ func (userService *UserService) GetUserInfo(uuid uuid.UUID) (user model.SysUser,
 // @return: err error
 func (userService *UserService) DeleteUser(id uint) (err error) {
 	var user model.SysUser
-	err = global.GVA_DB.Where("id = ?", id).Delete(&user).Error
+	err = global.GPA_DB.Where("id = ?", id).Delete(&user).Error
 	if err != nil {
 		return err
 	}
@@ -115,7 +115,7 @@ func (userService *UserService) DeleteUser(id uint) (err error) {
 // @param: id uint
 // @return: err error
 func (userService *UserService) ResetPassword(id uint) (err error) {
-	err = global.GVA_DB.Model(&model.SysUser{}).Where("id = ?", id).Update("password", utils.BcryptHash("123456")).Error
+	err = global.GPA_DB.Model(&model.SysUser{}).Where("id = ?", id).Update("password", utils.BcryptHash("123456")).Error
 	return err
 }
 
@@ -126,11 +126,11 @@ func (userService *UserService) ResetPassword(id uint) (err error) {
 //@return: err error
 
 func (userService *UserService) SetUserAuthority(id uint, authorityId uint) (err error) {
-	assignErr := global.GVA_DB.Where("sys_user_id = ? AND sys_authority_authority_id = ?", id, authorityId).First(&model.SysUserAuthority{}).Error
+	assignErr := global.GPA_DB.Where("sys_user_id = ? AND sys_authority_authority_id = ?", id, authorityId).First(&model.SysUserAuthority{}).Error
 	if errors.Is(assignErr, gorm.ErrRecordNotFound) {
 		return errors.New("该用户无此角色")
 	}
-	err = global.GVA_DB.Where("id = ?", id).First(&model.SysUser{}).Update("authority_id", authorityId).Error
+	err = global.GPA_DB.Where("id = ?", id).First(&model.SysUser{}).Update("authority_id", authorityId).Error
 	return err
 }
 
@@ -141,7 +141,7 @@ func (userService *UserService) SetUserAuthority(id uint, authorityId uint) (err
 //@return: err error
 
 func (userService *UserService) SetUserAuthorities(id uint, authorityIds []uint) (err error) {
-	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+	return global.GPA_DB.Transaction(func(tx *gorm.DB) error {
 		TxErr := tx.Delete(&[]model.SysUserAuthority{}, "sys_user_id = ?", id).Error
 		if TxErr != nil {
 			return TxErr
@@ -172,7 +172,7 @@ func (userService *UserService) SetUserAuthorities(id uint, authorityIds []uint)
 //@return: err error, user model.SysUser
 
 func (userService *UserService) SetUserInfo(req model.SysUser) error {
-	return global.GVA_DB.Model(&model.SysUser{}).
+	return global.GPA_DB.Model(&model.SysUser{}).
 		Select("updated_at", "nick_name", "header_img", "phone", "email", "sideMode", "enable").
 		Where("id=?", req.ID).
 		Updates(map[string]interface{}{
@@ -193,7 +193,7 @@ func (userService *UserService) SetUserInfo(req model.SysUser) error {
 //@return: err error, user model.SysUser
 
 func (userService *UserService) SetSelfInfo(req model.SysUser) error {
-	return global.GVA_DB.Model(&model.SysUser{}).
+	return global.GPA_DB.Model(&model.SysUser{}).
 		Where("id=?", req.ID).
 		Updates(req).Error
 }
@@ -206,7 +206,7 @@ func (userService *UserService) SetSelfInfo(req model.SysUser) error {
 
 func (userService *UserService) FindUserById(id int) (user *model.SysUser, err error) {
 	var u model.SysUser
-	err = global.GVA_DB.Where("`id` = ?", id).First(&u).Error
+	err = global.GPA_DB.Where("`id` = ?", id).First(&u).Error
 	return &u, err
 }
 
@@ -218,7 +218,7 @@ func (userService *UserService) FindUserById(id int) (user *model.SysUser, err e
 
 func (userService *UserService) FindUserByUuid(uuid string) (user *model.SysUser, err error) {
 	var u model.SysUser
-	if err = global.GVA_DB.Where("`uuid` = ?", uuid).First(&u).Error; err != nil {
+	if err = global.GPA_DB.Where("`uuid` = ?", uuid).First(&u).Error; err != nil {
 		return &u, errors.New("用户不存在")
 	}
 	return &u, nil

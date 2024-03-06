@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	GVA_CONFIG              config.Server
-	GVA_LOG                 *zap.Logger
-	GVA_DB                  *gorm.DB
-	GVA_VP                  *viper.Viper
-	GVA_REDIS               *redis.Client
-	GVA_Concurrency_Control = &singleflight.Group{}
+	GPA_CONFIG              config.Server
+	GPA_LOG                 *zap.Logger
+	GPA_DB                  *gorm.DB
+	GPA_VP                  *viper.Viper
+	GPA_REDIS               *redis.Client
+	GPA_Concurrency_Control = &singleflight.Group{}
 	BlackCache              local_cache.Cache
 )

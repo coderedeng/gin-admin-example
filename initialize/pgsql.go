@@ -10,12 +10,12 @@ import (
 
 func Pgsql() *gorm.DB {
 	dsn := fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s %s",
-		global.GVA_CONFIG.Pgsql.Host,
-		global.GVA_CONFIG.Pgsql.Port,
-		global.GVA_CONFIG.Pgsql.UserName,
-		global.GVA_CONFIG.Pgsql.DbName,
-		global.GVA_CONFIG.Pgsql.PassWord,
-		global.GVA_CONFIG.Pgsql.Config,
+		global.GPA_CONFIG.Pgsql.Host,
+		global.GPA_CONFIG.Pgsql.Port,
+		global.GPA_CONFIG.Pgsql.UserName,
+		global.GPA_CONFIG.Pgsql.DbName,
+		global.GPA_CONFIG.Pgsql.PassWord,
+		global.GPA_CONFIG.Pgsql.Config,
 	)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -23,8 +23,8 @@ func Pgsql() *gorm.DB {
 	}
 
 	sqlDB, _ := db.DB()
-	sqlDB.SetMaxIdleConns(global.GVA_CONFIG.Pgsql.MaxIdleConns)
-	sqlDB.SetMaxOpenConns(global.GVA_CONFIG.Pgsql.MaxOpenConns)
+	sqlDB.SetMaxIdleConns(global.GPA_CONFIG.Pgsql.MaxIdleConns)
+	sqlDB.SetMaxOpenConns(global.GPA_CONFIG.Pgsql.MaxOpenConns)
 
 	//defer db.Close()
 	return db

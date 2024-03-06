@@ -23,7 +23,7 @@ func (j *JwtApi) JsonInBlacklist(c *gin.Context) {
 	jwt := model.JwtBlacklist{Jwt: token}
 	err := jwtService.JsonInBlacklist(jwt)
 	if err != nil {
-		global.GVA_LOG.Error("jwt作废失败!", zap.Error(err))
+		global.GPA_LOG.Error("jwt作废失败!", zap.Error(err))
 		response.FailWithMessage("jwt作废失败", c)
 		return
 	}
