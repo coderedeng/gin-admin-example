@@ -30,6 +30,9 @@ go run main.go
 
 6. 访问接口管理界面：
 
+- 生成swagger文档
+-     swag init
+  
 - 在浏览器中输入 
 
 -     swagger后端文档地址:http://127.0.0.1:8888/swagger/index.html
