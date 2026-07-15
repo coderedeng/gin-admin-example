@@ -1,0 +1,47 @@
+system:
+  name: "github.com/coderedeng/gin-admin-example"
+  port: 8888
+  mode: "dev"
+  routerPrefix: "/v1"
+  use-multipoint: false
+pgsql:
+  host: "127.0.0.1"
+  port: 5432
+  config: sslmode=disable TimeZone=Asia/Shanghai
+  db-name: "gpa"
+  username: "postgres"
+  password: "123456"
+  prefix: ""
+  singular: false
+  engine: ""
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: error
+  log-zap: false
+zap:
+  level: "info"
+  prefix: '[github.com/coderedeng/gin-admin-example]'
+  format: console
+  director: log
+  encode-level: LowercaseColorLevelEncoder
+  stacktrace-key: stacktrace
+  max-age: 0
+  show-line: true
+  log-in-console: true
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  db: 0
+  poolSize: 20
+captcha:
+    key-long: 6
+    img-width: 240
+    img-height: 80
+    open-captcha: 0
+    open-captcha-timeout: 3600
+jwt:
+  signing-key: 6df93537-eb48-46d7-9c2e-6d9bcdec6c43
+  expires-time: 7d
+  buffer-time: 1d
+  issuer: qmPlus
